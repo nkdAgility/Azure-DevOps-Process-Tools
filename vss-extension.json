@@ -3,7 +3,7 @@
     "id": "processtemplate",
     "name": "Process Template Upload",
     "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#",
-    "public": true,
+    "public": false,
     "publisher": "nkdAgility",
     "targets": [
         {
