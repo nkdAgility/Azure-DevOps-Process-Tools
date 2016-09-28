@@ -11,9 +11,9 @@
     ],
     "author": "Martin Hinshelwood",
     "version": {
-        "Major": 0,
-        "Minor": 1,
-        "Patch": 0
+        "Major": #{GitVersion.Major}#,
+        "Minor": #{GitVersion.Minor}#,
+        "Patch": #{GitVersion.Patch}#
     },
     "minimumAgentVersion": "1.92.0",
     "groups": [

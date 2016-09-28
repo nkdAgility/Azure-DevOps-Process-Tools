@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "processtemplate",
     "name": "Process Template Upload",
-    "version": "0.1.0",
+    "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#",
     "public": true,
     "publisher": "nkdAgility",
     "targets": [

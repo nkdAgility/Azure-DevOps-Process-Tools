@@ -1,6 +1,6 @@
 {
   "name": "nkdAgility.vsts-processtemplate-task",
-  "version": "0.1.0",
+  "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#",
   "description": "Build task for VS Team Services that can upload Process Templates.",
   "author": "Martin Hinshelwood",
   "license": "MIT",
