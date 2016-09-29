@@ -1,18 +1,19 @@
 [CmdletBinding()]
 param(
     [string] $account,
-    [string] $user,
-    [string] $token
+    [string] $token,
+    [string] $processTemplateFile
 )
 
 
-$account = "http://nkdagility.visualstudio.com"
-$user = "martin@nkdagility.com"
-$token = "<testtoken>"
 # Base64-encodes the Personal Access Token (PAT) appropriately
-$base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f $user,$token)))
+$base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "",$token)))
 $headers = @{authorization=("Basic {0}" -f $base64AuthInfo)}
 $urllistprocess = "$($account)/_apis/process/processes?api-version=1.0"
-$stuff = Invoke-RestMethod -Uri $urllistprocess -Headers $headers -ContentType "application/json" -Method Get;
-
-$stuff
+$currentProcesses = Invoke-RestMethod -Uri $urllistprocess -Headers $headers -ContentType "application/json" -Method Get;
+foreach ($process in $currentProcesses.value)
+{
+   Write-Output "Found " $process.name " as " $process.url
+}
+$urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
+Invoke-RestMethod -InFile $processTemplateFile -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
