@@ -1,8 +1,8 @@
 {
-    "id": "A8515EC8-7254-4FFD-912C-86772E2B5962",
+    "id": "63823D31-810C-4957-9BC1-859757ACE94D",
     "name": "processtemplate",
-    "friendlyName": "Process Template Deploy",
-    "description": "Deploys a Process Template",
+    "friendlyName": "Process Template Uploader",
+    "description": "Deploys a Process Template to VSTS",
     "helpMarkDown": "[More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
     "category": "Utility",
     "visibility": [
