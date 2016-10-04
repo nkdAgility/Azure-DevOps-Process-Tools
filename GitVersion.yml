@@ -8,5 +8,7 @@ branches:
     tag: ''
   (fix)?:
      tag: 'Preview'
+  (!master)?:
+     tag: 'Preview'
 ignore:
   sha: []
