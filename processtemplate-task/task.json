@@ -3,7 +3,7 @@
     "name": "processtemplate",
     "friendlyName": "Process Template Uploader",
     "description": "Deploys a Process Template to VSTS",
-    "helpMarkDown": "[More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
+    "helpMarkDown": "v#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}# [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
     "category": "Deploy",
     "visibility": [
         "Build",
@@ -13,7 +13,7 @@
     "version": {
         "Major": #{GitVersion.Major}#,
         "Minor": #{GitVersion.Minor}#,
-        "Patch": #{GitVersion.Patch}#
+        "Patch": #{GitVersion.Patch}##{GitVersion.COMMITSSINCEVERSIONSOURCE}#
     },
     "minimumAgentVersion": "1.92.0",
     "groups": [
@@ -21,21 +21,16 @@
             "name": "missing",
             "displayName": "Missing variables",
             "isExpanded": true
-        },
-        {
-            "name": "advanced",
-            "displayName": "Advanced",
-            "isExpanded": false
         }
     ],
     "inputs": [
         {
             "name": "account",
             "type": "string",
-            "label": "VSTS Account",
-            "defaultValue": "https://privatepreview.visualstudio.com/",
+            "label": "VSTS Account URL",
+            "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The URL of the VSTS instance to deploy the Template to"
+            "helpMarkDown": "The URL of the VSTS instance to deploy the Template too. e.g. https://myaccount.visualstudio.com"
         },
         {
             "name": "accesstoken",
@@ -45,17 +40,17 @@
             "helpMarkDown": "Personal access token for that instance of VSTS"
         },
         {
-            "name": "rootDirectory",
+            "name": "matchProcessTemplates",
             "type": "filePath",
-            "label": "Root directory",
+            "label": "Process Template",
             "defaultValue": "$(System.DefaultWorkingDirectory)\\*.zip",
             "required": true,
-            "helpMarkDown": "Base directory for searching files."
+            "helpMarkDown": "Search for one or more process templates to upload. Support wildcards."
         }
     ],
     "instanceNameFormat": "Uploads template to $(account)",
     "execution": {
-        "PowerShell": {
+        "PowerShell3": {
             "target": "$(currentDirectory)\\upload-process-template.ps1",
             "argumentFormat": "",
             "workingDirectory": "$(System.DefaultWorkingDirectory)"
