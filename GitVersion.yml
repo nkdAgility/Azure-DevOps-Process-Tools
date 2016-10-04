@@ -6,7 +6,7 @@ branches:
   master:
     mode: ContinuousDeployment
     tag: ''
-  others:
+  feature:
    regex: !master
     mode: ContinuousDeployment
      tag: 'Preview'
