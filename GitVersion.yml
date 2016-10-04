@@ -7,8 +7,16 @@ branches:
     mode: ContinuousDeployment
     tag: ''
   feature:
-   regex: !master
-    mode: ContinuousDeployment
      tag: 'Preview'
+  release:
+     tag: 'Preview'
+  pull-request:
+     tag: 'Preview'
+  hotfix:
+     tag: 'Preview'
+  support:
+     tag: 'Preview'     
+  develop:
+     tag: 'Preview'  
 ignore:
   sha: []
