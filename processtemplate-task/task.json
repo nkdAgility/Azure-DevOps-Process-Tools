@@ -3,7 +3,7 @@
     "name": "processtemplate",
     "friendlyName": "Process Template Uploader",
     "description": "Deploys a Process Template to VSTS",
-    "helpMarkDown": "[More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
+    "helpMarkDown": "v#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}# [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
     "category": "Deploy",
     "visibility": [
         "Build",
@@ -21,21 +21,16 @@
             "name": "missing",
             "displayName": "Missing variables",
             "isExpanded": true
-        },
-        {
-            "name": "advanced",
-            "displayName": "Advanced",
-            "isExpanded": false
         }
     ],
     "inputs": [
         {
             "name": "account",
             "type": "string",
-            "label": "VSTS Account",
-            "defaultValue": "https://privatepreview.visualstudio.com/",
+            "label": "VSTS Account URL",
+            "defaultValue": "",
             "required": true,
-            "helpMarkDown": "The URL of the VSTS instance to deploy the Template to"
+            "helpMarkDown": "The URL of the VSTS instance to deploy the Template to. e.g. https://myaccount.visualstudio.com"
         },
         {
             "name": "accesstoken",
