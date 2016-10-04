@@ -2,7 +2,7 @@
 param(
     [string] $account,
     [string] $accesstoken,
-    [string] $processTemplateFile
+    [string] $rootDirectory
 )
 
 # Base64-encodes the Personal Access Token (PAT) appropriately
@@ -15,8 +15,8 @@ foreach ($process in $currentProcesses.value)
    Write-Output "Found " $process.name " as " $process.url
 }
 $urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
-foreach ($file in Get-ChildItem $processTemplateFile)
+foreach ($file in Get-ChildItem $rootDirectory)
 {
     Write-Output "Updating with  " $file
-    Invoke-RestMethod -InFile $processTemplateFile -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
+    Invoke-RestMethod -InFile $file -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
 }
