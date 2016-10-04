@@ -1,10 +1,13 @@
 assembly-versioning-scheme: MajorMinorPatch
 mode: ContinuousDeployment
-continuous-delivery-fallback-tag: ''
+continuous-delivery-fallback-tag: 'Preview'
 next-version: 0.1.0
 branches:
   master:
     mode: ContinuousDeployment
     tag: ''
+  feature:
+    mode: ContinuousDelivery
+    tag: 'Preview'
 ignore:
   sha: []

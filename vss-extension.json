@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
-    "id": "processtemplate",
-    "name": "Process Template Uploader",
+    "id": "processtemplate#{GitVersion.PreReleaseLabel}#",
+    "name": "Process Template Uploader #{GitVersion.PreReleaseLabel}#",
     "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}#",
     "public": false,
     "publisher": "nkdAgility",

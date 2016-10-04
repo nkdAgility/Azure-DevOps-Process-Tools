@@ -1,10 +1,9 @@
 [CmdletBinding()]
 param(
     [string] $account,
-    [string] $token,
+    [string] $accesstoken,
     [string] $processTemplateFile
 )
-
 
 # Base64-encodes the Personal Access Token (PAT) appropriately
 $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "",$token)))
@@ -16,4 +15,8 @@ foreach ($process in $currentProcesses.value)
    Write-Output "Found " $process.name " as " $process.url
 }
 $urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
-Invoke-RestMethod -InFile $processTemplateFile -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
+foreach ($file in Get-ChildItem $processTemplateFile)
+{
+    Write-Output "Updating with  " $file
+    Invoke-RestMethod -InFile $processTemplateFile -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
+}

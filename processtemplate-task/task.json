@@ -4,7 +4,7 @@
     "friendlyName": "Process Template Uploader",
     "description": "Deploys a Process Template to VSTS",
     "helpMarkDown": "[More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
-    "category": "Utility",
+    "category": "Deploy",
     "visibility": [
         "Build",
         "Release"
