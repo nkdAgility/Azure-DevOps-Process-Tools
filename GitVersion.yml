@@ -13,6 +13,7 @@ branches:
   pull-request:
      tag: 'Preview'
   hotfix:
+     regex: fix?[/-]
      tag: 'Preview'
   support:
      tag: 'Preview'     
