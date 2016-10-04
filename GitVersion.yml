@@ -6,18 +6,7 @@ branches:
   master:
     mode: ContinuousDeployment
     tag: ''
-  feature:
+  (!master):
      tag: 'Preview'
-  release:
-     tag: 'Preview'
-  pull-request:
-     tag: 'Preview'
-  hotfix:
-     regex: fix?[/-]
-     tag: 'Preview'
-  support:
-     tag: 'Preview'     
-  develop:
-     tag: 'Preview'  
 ignore:
   sha: []
