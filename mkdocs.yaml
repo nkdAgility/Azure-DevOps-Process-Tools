@@ -1,0 +1,4 @@
+site_name: VSTS Process Template Management
+pages:
+- Home: index.md
+theme: readthedocs

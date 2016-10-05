@@ -1,7 +1,7 @@
 {
     "manifestVersion": 1,
     "id": "processtemplate#{GitVersion.PreReleaseLabel}#",
-    "name": "Process Template Uploader #{GitVersion.PreReleaseLabel}#",
+    "name": "Process Template Manager #{GitVersion.PreReleaseLabel}#",
     "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}#",
     "public": false,
     "publisher": "nkdAgility",
@@ -13,7 +13,7 @@
             "id": "Microsoft.VisualStudio.Services"
         }
     ],    
-    "description": "Task to upload Process Template changes to VSTS",
+    "description": "Incudes tasks to help you manage your Process Templates in VSTS.",
     "categories": [
         "Build and release"
     ],
