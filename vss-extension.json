@@ -5,6 +5,9 @@
     "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}#",
     "public": false,
     "publisher": "nkdAgility",
+    "galleryFlags": [
+        "#{Extension.galleryFlags}#"
+    ],
     "targets": [
         {
             "id": "Microsoft.VisualStudio.Services"
