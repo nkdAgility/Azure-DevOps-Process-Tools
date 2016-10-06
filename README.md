@@ -7,4 +7,6 @@ One of the largest issues for Enterprise is everyone using a different process t
 This Build Task lets you upload a local template into VSTS.
 
 
-![Screenshot of Process Template Uploader](images/screenshot-01.png)
+![Screenshot of Process Template Uploader](/images/screenshot-01.png)
+
+Full documentation is available on [http://vsts-process-template-management.readthedocs.io](http://vsts-process-template-management.readthedocs.io)

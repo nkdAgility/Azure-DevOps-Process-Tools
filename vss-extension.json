@@ -2,7 +2,7 @@
     "manifestVersion": 1,
     "id": "processtemplate#{GitVersion.PreReleaseLabel}#",
     "name": "Process Template Manager #{GitVersion.PreReleaseLabel}#",
-    "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}#",
+    "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#",
     "public": false,
     "publisher": "nkdAgility",
     "galleryFlags": [
@@ -20,17 +20,17 @@
     "tags": [
         "release",
         "build",
-        "token",
-        "replace",
-        "variable",
-        "substitution"
+        "process",
+        "process template",
+        "template",
+        "upload"
     ],
     "links": {
         "learn": {
-            "uri": "https://github.com/nkdAgility/vsts-process-template-task#readme"
+            "uri": "http://vsts-process-template-management.readthedocs.io"
         },
         "support": {
-            "uri": "https://github.com/nkdAgility/vsts-process-template-task/issues"  
+            "uri": "https://github.com/nkdAgility/vsts-process-template-manager/issues"  
         }
     },
     "icons": {
