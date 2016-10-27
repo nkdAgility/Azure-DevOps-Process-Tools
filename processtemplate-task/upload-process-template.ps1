@@ -51,6 +51,7 @@ $urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?ignor
 $uploads = Get-ChildItem $matchProcessTemplates
 Write-Output "You have specified $($uploads.count) process templates to upload"
 Write-VstsTaskVerbose $uploads
+$returnResult = 0
 foreach ($file in $uploads)
 {
     Write-Output "Uploading $file" 
@@ -67,15 +68,16 @@ foreach ($file in $uploads)
         Write-VstsTaskError "Did not get a result retunred from the upload, twas not even JSON!"
         Write-VstsTaskError $ErrorMessage
         Write-VstsTaskError $result
-        exit 666
+        Write-VstsSetResult -Result Failed -Message $ErrorMessage
     }
     if ($result.validationResults.Count -eq 0)
     {
         Write-Output "$($file.Name) sucessfully validated"
-        exit 0
     } else {
         Write-VstsTaskError "Validation Failed for $($file.Name)"
-        Write-VstsTaskError $uploadResult
-        exit 1
+        foreach ($error in $result.validationResults)
+        {
+           Write-VstsTaskError $error
+        }
     }
 }
