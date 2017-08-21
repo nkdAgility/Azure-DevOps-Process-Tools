@@ -73,6 +73,22 @@
       "properties": {
         "name": "processtemplate-task"
       }
+    },
+    {
+      "id": "processtemplate-endpoint",
+      "description": "Service Endpoint for Process Template Uploads",
+      "type": "ms.vss-endpoint.service-endpoint-type",
+      "targets": [ "ms.vss-endpoint.endpoint-types" ],
+      "properties": {
+        "name": "ProcessTemplateEndpoint",
+        "displayName": "VSTS Process Template Upload Connection",
+        "authenticationSchemes": [
+          {
+            "type": "ms.vss-endpoint.endpoint-auth-scheme-token"
+          }
+        ],
+        "helpMarkDown": "<a href=\"url-to-documentation\" target=\"_blank\"><b>Learn More</b></a>"
+      }
     }
   ]
 }

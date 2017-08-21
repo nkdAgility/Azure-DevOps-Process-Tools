@@ -23,31 +23,32 @@
             "isExpanded": true
         }
     ],
-    "inputs": [
-        {
-            "name": "account",
-            "type": "string",
-            "label": "VSTS Account URL",
-            "defaultValue": "",
-            "required": true,
-            "helpMarkDown": "The URL of the VSTS instance to deploy the Template too. e.g. https://myaccount.visualstudio.com"
-        },
-        {
-            "name": "accesstoken",
-            "type": "string",
-            "label": "Access Token",
-            "required": true,
-            "helpMarkDown": "Personal access token for that instance of VSTS"
-        },
-        {
-            "name": "matchProcessTemplates",
-            "type": "filePath",
-            "label": "Process Template",
-            "defaultValue": "$(System.DefaultWorkingDirectory)\\*.zip",
-            "required": true,
-            "helpMarkDown": "Search for one or more process templates to upload. Support wildcards."
-        }
-    ],
+  "inputs": [
+    {
+      "name": "processTemplateService",
+      "type": "connectedService:ProcessTemplateEndpoint",
+      "label": "end point",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Select the end point to use. If needed, click on 'manage', and add a new Service Endpoint of type 'Fabrikam server connection'"
+    },
+    {
+      "name": "account",
+      "type": "string",
+      "label": "VSTS Account URL",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "The URL of the VSTS instance to deploy the Template too. e.g. https://myaccount.visualstudio.com"
+    },
+    {
+      "name": "matchProcessTemplates",
+      "type": "filePath",
+      "label": "Process Template",
+      "defaultValue": "$(System.DefaultWorkingDirectory)\\*.zip",
+      "required": true,
+      "helpMarkDown": "Search for one or more process templates to upload. Support wildcards."
+    }
+  ],
     "instanceNameFormat": "Uploads template to $(account)",
     "execution": {
         "PowerShell3": {

@@ -6,7 +6,7 @@ param(
 )
 $account = Get-VstsInput -Name account -Require
 $matchProcessTemplates = Get-VstsInput -Name matchProcessTemplates -Require
-$accesstoken = Get-VstsInput -Name accesstoken -Require
+$accesstoken = Get-VstsInput -Name processTemplateService -Require
 
 Write-VstsTaskVerbose "Account: $account" 
 Write-VstsTaskVerbose "matchProcessTemplates: $matchProcessTemplates" 
