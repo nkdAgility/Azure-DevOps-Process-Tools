@@ -1,12 +1,13 @@
 {
     "manifestVersion": 1,
-    "id": "processtemplate#{GitVersion.PreReleaseLabel}#",
-    "name": "Process Template Manager #{GitVersion.PreReleaseLabel}#",
+    "id": "processtemplate",
+    "name": "VSTS Process Template Manager",
     "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#",
     "public": false,
     "publisher": "nkdAgility",
     "galleryFlags": [
-        "#{Extension.galleryFlags}#"
+      "Preview",
+      "Free"
     ],
     "targets": [
         {
