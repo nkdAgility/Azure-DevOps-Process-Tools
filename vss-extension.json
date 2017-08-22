@@ -6,7 +6,7 @@
   "public": false,
   "publisher": "nkdAgility",
   "galleryFlags": [
-    "Preview",
+    "Public",
     "Free"
   ],
   "targets": [
@@ -72,6 +72,16 @@
       ],
       "properties": {
         "name": "processtemplate-task"
+      }
+    },
+    {
+      "id": "processtemplate-task-v1",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "processtemplate-task-v1"
       }
     },
     {
