@@ -61,9 +61,6 @@
   "files": [
     {
       "path": "processtemplate-task"
-    },
-    {
-      "path": "processtemplate-task-v1"
     }
   ],
   "contributions": [
@@ -75,16 +72,6 @@
       ],
       "properties": {
         "name": "processtemplate-task"
-      }
-    },
-    {
-      "id": "processtemplate-task-v1",
-      "type": "ms.vss-distributed-task.task",
-      "targets": [
-        "ms.vss-distributed-task.tasks"
-      ],
-      "properties": {
-        "name": "processtemplate-task-v1"
       }
     },
     {
