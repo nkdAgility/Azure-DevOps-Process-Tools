@@ -1,73 +1,104 @@
 {
-    "manifestVersion": 1,
-    "id": "processtemplate#{GitVersion.PreReleaseLabel}#",
-    "name": "Process Template Manager #{GitVersion.PreReleaseLabel}#",
-    "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#",
-    "public": false,
-    "publisher": "nkdAgility",
-    "galleryFlags": [
-        "#{Extension.galleryFlags}#"
-    ],
-    "targets": [
-        {
-            "id": "Microsoft.VisualStudio.Services"
-        }
-    ],    
-    "description": "Incudes tasks to help you manage your Process Templates in VSTS.",
-    "categories": [
-        "Build and release"
-    ],
-    "tags": [
-        "release",
-        "build",
-        "process",
-        "process template",
-        "template",
-        "upload"
-    ],
-    "links": {
-        "learn": {
-            "uri": "http://vsts-process-template-management.readthedocs.io"
-        },
-        "support": {
-            "uri": "https://github.com/nkdAgility/vsts-process-template-manager/issues"  
-        }
+  "manifestVersion": 1,
+  "id": "processtemplate",
+  "name": "VSTS Process Template Manager",
+  "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#",
+  "public": false,
+  "publisher": "nkdAgility",
+  "galleryFlags": [
+    "Public",
+    "Free"
+  ],
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "description": "Incudes tasks to help you manage your Process Templates in VSTS.",
+  "categories": [
+    "Build and release"
+  ],
+  "tags": [
+    "release",
+    "build",
+    "process",
+    "process template",
+    "template",
+    "upload"
+  ],
+  "links": {
+    "learn": {
+      "uri": "http://vsts-process-template-management.readthedocs.io"
     },
-    "icons": {
-        "default": "images/extension-icon.png"
+    "support": {
+      "uri": "https://github.com/nkdAgility/vsts-process-template-manager/issues"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "uri": "https://github.com/nkdAgility/vsts-process-template-manager"
+  },
+  "icons": {
+    "default": "images/extension-icon.png"
+  },
+  "branding": {
+    "color": "#1C3272",
+    "theme": "dark"
+  },
+  "screenshots": [
+    {
+      "path": "images/screenshot-01.png"
+    }
+  ],
+  "content": {
+    "details": {
+      "path": "README.md"
     },
-    "branding": {
-        "color": "#1C3272",
-        "theme": "dark"
+    "license": {
+      "path": "LICENSE.txt"
+    }
+  },
+  "files": [
+    {
+      "path": "processtemplate-task"
+    }
+  ],
+  "contributions": [
+    {
+      "id": "processtemplate-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "processtemplate-task"
+      }
     },
-    "screenshots": [
-        {
-            "path": "images/screenshot-01.png"
-        }
-    ],
-    "content": {
-        "details": {
-            "path": "README.md"
-        },
-        "license": {
-            "path": "LICENSE.txt"
-        }
+    {
+      "id": "processtemplate-task-v1",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "processtemplate-task-v1"
+      }
     },
-    "files": [
-        {
-            "path": "processtemplate-task"
-        }
-    ],
-    "contributions": [
-        {
-            "id": "processtemplate-task",
-            "type": "ms.vss-distributed-task.task",
-            "targets": [
-                "ms.vss-distributed-task.tasks"
-            ],
-            "properties": {
-                "name": "processtemplate-task"
-            }
-        }
-    ]
+    {
+      "id": "processtemplate-endpoint",
+      "description": "Service Endpoint for Process Template Uploads",
+      "type": "ms.vss-endpoint.service-endpoint-type",
+      "targets": [ "ms.vss-endpoint.endpoint-types" ],
+      "properties": {
+        "name": "ProcessTemplateEndpoint",
+        "displayName": "VSTS Process Template Upload Connection",
+        "authenticationSchemes": [
+          {
+            "type": "ms.vss-endpoint.endpoint-auth-scheme-token"
+          }
+        ],
+        "helpMarkDown": "<a href=\"url-to-documentation\" target=\"_blank\"><b>Learn More</b></a>"
+      }
+    }
+  ]
 }
