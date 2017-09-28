@@ -61,6 +61,9 @@
   "files": [
     {
       "path": "processtemplate-task"
+    },
+    {
+      "path": "processtemplate-task-v1"
     }
   ],
   "contributions": [
