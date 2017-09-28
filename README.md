@@ -1,4 +1,4 @@
-# Process Template Manager
+# VSTS Process Template Manager [![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/version-short/nkdagility.processtemplate.svg)](https://marketplace.visualstudio.com/items?itemName=nkdagility.processtemplate)
 
 This task automates the Process of managing your Process Template changes from source control to VSTS so that you can keep all your projects in sync. 
 
@@ -7,6 +7,19 @@ One of the largest issues for Enterprise is everyone using a different process t
 This Build Task lets you upload a local template into VSTS.
 
 
+## What can you do with this tool?
+
+- Upload XML Based Process Template
+
 ![Screenshot of Process Template Uploader](/images/screenshot-01.png)
 
 Full documentation is available on [http://vsts-process-template-management.readthedocs.io](http://vsts-process-template-management.readthedocs.io)
+
+## Getting the Tools
+
+ You can [install from the Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=nkdagility.processtemplate) 
+
+
+
+
+
