@@ -1,4 +1,4 @@
-# Process Template Manager
+# VSTS Process Template Manager
 
 Get the [VSTS Process Template Management](https://marketplace.visualstudio.com/items?itemName=nkdagility.processtemplate) extensions for VSTS from the Marketplace.
 
