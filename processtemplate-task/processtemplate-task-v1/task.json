@@ -1,6 +1,6 @@
 {
   "id": "63823D31-810C-4957-9BC1-859757ACE94D",
-  "name": "processtemplate",
+  "name": "processtemplatetask",
   "friendlyName": "Process Template Uploader",
   "description": "Deploys a Process Template to VSTS",
   "helpMarkDown": "v#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}# [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
