@@ -71,7 +71,7 @@
         "ms.vss-distributed-task.tasks"
       ],
       "properties": {
-        "name": "processtemplate-task"
+        "name": "processtemplate"
       }
     },
     {
