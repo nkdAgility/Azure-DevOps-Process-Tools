@@ -60,7 +60,7 @@
   },
   "files": [
     {
-      "path": "processtemplate-task"
+      "path": "processtemplatetask"
     }
   ],
   "contributions": [
@@ -71,7 +71,7 @@
         "ms.vss-distributed-task.tasks"
       ],
       "properties": {
-        "name": "processtemplate-task"
+        "name": "processtemplatetask"
       }
     },
     {

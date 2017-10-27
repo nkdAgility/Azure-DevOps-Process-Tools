@@ -1,24 +1,23 @@
 {
   "id": "63823D31-810C-4957-9BC1-859757ACE94D",
-  "name": "processtemplate",
+  "name": "processtemplatetask",
   "friendlyName": "Process Template Uploader",
   "description": "Deploys a Process Template to VSTS",
   "helpMarkDown": "v#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}# [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
   "category": "Deploy",
   "visibility": [
     "Build",
-    "Release",
-    "Preview"
+    "Release"
   ],
+  "author": "Martin Hinshelwood",
+  "version": {
+    "Major": 1,
+    "Minor": 9,
+    "Patch": 0
+  },
   "runsOn": [
     "Agent"
   ],
-  "author": "naked Agility Limited - Martin Hinshelwood",
-  "version": {
-    "Major": "#{GitVersion.Major}#",
-    "Minor": "#{GitVersion.Minor}#",
-    "Patch": "#{GitVersion.Patch}#"
-  },
   "minimumAgentVersion": "1.92.0",
   "groups": [
     {
