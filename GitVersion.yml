@@ -4,6 +4,9 @@ continuous-delivery-fallback-tag: ''
 next-version: 2.1.5
 branches:
   master:
-    tag: 'Preview'
+    mode: ContinuousDeployment
+    tag: ''
+  ((?!(master)|(feature)|(pull)).):
+     tag: 'Preview'
 ignore:
   sha: []
