@@ -5,7 +5,7 @@ next-version: 2.1.8
 branches:
   master:
     mode: ContinuousDeployment
-    tag: ''
+    tag: 'ci'
   ((?!(master)|(feature)|(pull)).):
      tag: 'Preview'
 ignore:
