@@ -1,5 +1,7 @@
 node_modules/
 *.vsix
+*.zip
 _build/
 _packages/
 /.vs
+tests/data/
