@@ -4,17 +4,19 @@ param(
     [string] $accesstoken,
     [string] $matchProcessTemplates
 )
-$account = Get-VstsInput -Name account -Require
-$matchProcessTemplates = Get-VstsInput -Name matchProcessTemplates -Require
-$accesstoken = Get-VstsInput -Name processTemplateService -Require
+$account = Get-Input -Name account -Require
+$matchProcessTemplates = Get-Input -Name matchProcessTemplates -Require
+$endpoint = Get-Endpoint -Name processTemplateService -Require
 
-Write-VstsTaskVerbose "Account: $account" 
-Write-VstsTaskVerbose "matchProcessTemplates: $matchProcessTemplates" 
-Write-VstsTaskVerbose "accesstoken: $accesstoken" 
+$accesstoken = [string]$endpoint.auth.parameters.AccessToken
+
+Write-TaskVerbose "Account: $account" 
+Write-TaskVerbose "matchProcessTemplates: $matchProcessTemplates" 
+Write-TaskVerbose "accesstoken: $accesstoken" 
 
 
 #Write-Output "rootDirectory  " $rootDirectory
-Write-VstsTaskVerbose "Building Base64 PAT Token"
+Write-TaskVerbose "Building Base64 PAT Token"
 # Base64-encodes the Personal Access Token (PAT) appropriately
 $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes(("{0}:{1}" -f "",$accesstoken)))
 $headers = @{authorization=("Basic {0}" -f $base64AuthInfo)}
@@ -23,7 +25,7 @@ $headers.Add("X-TFS-FedAuthRedirect","Suppress")
 # Get a List of Templates
 ##########################################
 $urllistprocess = "$($account)/_apis/process/processes?api-version=1.0"
-Write-VstsTaskVerbose "Calling $urllistprocess to get a list of current process templates."
+Write-TaskVerbose "Calling $urllistprocess to get a list of current process templates."
 $templates = Invoke-RestMethod -Uri $urllistprocess -Headers $headers -ContentType "application/json" -Method Get;
 Try
 {
@@ -33,13 +35,13 @@ Catch
 {
     $ErrorMessage = $_.Exception.Message
     $FailedItem = $_.Exception.ItemName
-    Write-VstsTaskError "Did not get a list of process templates back, twas not even JSON!"
-    Write-VstsTaskError "Most common cause is that you did not authenticate correctly, check the Access Token."
-    Write-VstsTaskError $ErrorMessage
+    Write-TaskError "Did not get a list of process templates back, twas not even JSON!"
+    Write-TaskError "Most common cause is that you did not authenticate correctly, check the Access Token."
+    Write-TaskError $ErrorMessage
     exit 999
 }
 # Write out the Tenplate list
-Write-VstsTaskVerbose "Returned $($templates.count) processe templates on $account"
+Write-TaskVerbose "Returned $($templates.count) processe templates on $account"
 foreach ($pt in $templates.value)
 {
     Write-Output "Found $($pt.name): $($pt.url)"
@@ -50,7 +52,7 @@ foreach ($pt in $templates.value)
 $urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
 $uploads = Get-ChildItem $matchProcessTemplates
 Write-Output "You have specified $($uploads.count) process templates to upload"
-Write-VstsTaskVerbose $uploads
+Write-TaskVerbose $uploads
 foreach ($file in $uploads)
 {
     Write-Output "Uploading $file" 
@@ -64,9 +66,9 @@ foreach ($file in $uploads)
     {
         $ErrorMessage = $_.Exception.Message
         $FailedItem = $_.Exception.ItemName
-        Write-VstsTaskError "Did not get a result retunred from the upload, twas not even JSON!"
-        Write-VstsTaskError $ErrorMessage
-        Write-VstsTaskError $result
+        Write-TaskError "Did not get a result retunred from the upload, twas not even JSON!"
+        Write-TaskError $ErrorMessage
+        Write-TaskError $result
         exit 666
     }
     if ($result.validationResults.Count -eq 0)
@@ -74,8 +76,8 @@ foreach ($file in $uploads)
         Write-Output "$($file.Name) sucessfully validated"
         exit 0
     } else {
-        Write-VstsTaskError "Validation Failed for $($file.Name)"
-        Write-VstsTaskError $uploadResult
+        Write-TaskError "Validation Failed for $($file.Name)"
+        Write-TaskError $uploadResult
         exit 1
     }
 }
