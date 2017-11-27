@@ -50,6 +50,14 @@
       "defaultValue": "$(System.DefaultWorkingDirectory)\\*.zip",
       "required": true,
       "helpMarkDown": "Search for one or more process templates to upload. Support wildcards."
+    },
+    {
+      "name": "overrideGuid",
+      "type": "string",
+      "label": "Process Template GUID Override",
+      "defaultValue": "",
+      "required": false,
+      "helpMarkDown": "The GUID of the process you would like to overwrite. Note that if there is significant diference between the in place template and the new one you will need to do a manual upload."
     }
   ],
   "instanceNameFormat": "Uploads template to $(account)",
