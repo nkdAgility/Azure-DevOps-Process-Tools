@@ -76,7 +76,7 @@ if ($OverrideProcessTemplateGUID -ne $null )
 # Upload templates
 ##########################################
 #$urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
-$urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?api-version=4.1-preview"
+$urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?api-version=4.0-preview.1"
 Write-Output "Uploading $file" 
 $result = Invoke-RestMethod -InFile $file -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
 Try
