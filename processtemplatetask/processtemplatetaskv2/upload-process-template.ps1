@@ -2,15 +2,21 @@
 param(
     [string] $account,
     [string] $accesstoken,
-    [string] $matchProcessTemplates
+    [string] $matchProcessTemplates,
+    [string] $overrideGuid
 )
 $account = Get-VstsInput -Name account -Require
 $matchProcessTemplates = Get-VstsInput -Name matchProcessTemplates -Require
-$accesstoken = Get-VstsInput -Name processTemplateService -Require
+$endpointName = Get-VstsInput -Name processTemplateService -Require
+$endpoint = Get-VstsEndpoint -Name $endpointName -Require
+$OverrideProcessTemplateGUID = Get-VstsInput -Name overrideGuid
+
+$accesstoken = [string]$endpoint.Auth.Parameters.ApiToken
 
 Write-VstsTaskVerbose "Account: $account" 
 Write-VstsTaskVerbose "matchProcessTemplates: $matchProcessTemplates" 
 Write-VstsTaskVerbose "accesstoken: $accesstoken" 
+Write-VstsTaskVerbose "GUID: $OverrideProcessTemplateGUID" 
 
 
 #Write-Output "rootDirectory  " $rootDirectory
@@ -45,37 +51,56 @@ foreach ($pt in $templates.value)
     Write-Output "Found $($pt.name): $($pt.url)"
 }
 ##########################################
+# Fix Overrides
+##########################################
+$file = Get-ChildItem $matchProcessTemplates
+Write-VstsTaskVerbose $file
+if ($OverrideProcessTemplateGUID -ne $null )
+{
+    Write-VstsTaskVerbose "***RUNNNING OVERIDES****"
+    Add-Type -AssemblyName System.IO.Compression.FileSystem
+    $workFolder = [System.IO.Path]::Combine($file.Directory.FullName, "template")
+    [System.IO.Compression.ZipFile]::ExtractToDirectory($file, $workFolder)
+    $processFile = "$workFolder\ProcessTemplate.xml"
+    $xml = [xml](get-content $processFile)
+    $guidXml = $xml.ProcessTemplate.metadata.version.Attributes.GetNamedItem("type")
+    $guid = $guidXml.'#text'
+     Write-VstsTaskVerbose "Current GUID is $guid and we are replacing it with $OverrideProcessTemplateGUID before upload"
+    $guidXml.'#text' = $OverrideProcessTemplateGUID
+    $xml.Save([string]$processFile)
+    [System.IO.File]::Move($file, "$file.old")
+    [System.IO.Compression.ZipFile]::CreateFromDirectory($workFolder,$file)
+}
+
+##########################################
 # Upload templates
 ##########################################
-$urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
-$uploads = Get-ChildItem $matchProcessTemplates
-Write-Output "You have specified $($uploads.count) process templates to upload"
-Write-VstsTaskVerbose $uploads
-foreach ($file in $uploads)
+#$urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
+$urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?api-version=4.1-preview"
+Write-Output "Uploading $file" 
+$result = Invoke-RestMethod -InFile $file -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
+Try
 {
-    Write-Output "Uploading $file" 
-    $result = Invoke-RestMethod -InFile $file -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
-    Try
-    {
-        $uploadResult = ConvertTo-Json $result
-        Write-Output "$file uploaded, checking validatiopn"
-    }
-    Catch
-    {
-        $ErrorMessage = $_.Exception.Message
-        $FailedItem = $_.Exception.ItemName
-        Write-VstsTaskError "Did not get a result retunred from the upload, twas not even JSON!"
-        Write-VstsTaskError $ErrorMessage
-        Write-VstsTaskError $result
-        exit 666
-    }
-    if ($result.validationResults.Count -eq 0)
-    {
-        Write-Output "$($file.Name) sucessfully validated"
-        exit 0
-    } else {
-        Write-VstsTaskError "Validation Failed for $($file.Name)"
-        Write-VstsTaskError $uploadResult
-        exit 1
-    }
+    $uploadResult = ConvertTo-Json $result
+    Write-Output "$file uploaded, checking validatiopn"
 }
+Catch
+{
+
+    $ErrorMessage = $_.Exception.Message
+    $FailedItem = $_.Exception.ItemName
+    Write-VstsTaskError "Did not get a result retunred from the upload, twas not even JSON!"
+    Write-VstsTaskError $ErrorMessage
+    Write-VstsTaskError $result
+    exit 666
+}
+if ($result.validationResults.Count -eq 0)
+{
+    Write-Output "$($file.Name) sucessfully validated"
+    exit 0
+} else {
+    Write-VstsTaskError "Validation Failed for $($file.Name)"
+    Write-VstsTaskError $uploadResult
+    exit 1
+}
+
