@@ -6,7 +6,7 @@ Import-Module ..\processtemplatetask\processtemplatetaskv2\ps_modules\VstsTaskSd
 
 $erroractionpreference='stop'
 # Input 'MyInput':
-$env:INPUT_Account = "https://slb-swt-devbox.visualstudio.com"
+$env:INPUT_Account = "https://xxx-xxx-devbox.visualstudio.com"
 $env:INPUT_matchProcessTemplates = "c:\temp\pt\SLM-PT-VSTS-2017.7.0.zip"
 $env:INPUT_overrideGuid = "newGUID"
 
