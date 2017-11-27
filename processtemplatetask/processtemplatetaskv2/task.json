@@ -21,8 +21,8 @@
   "minimumAgentVersion": "1.92.0",
   "groups": [
     {
-      "name": "missing",
-      "displayName": "Missing variables",
+      "name": "Overrides",
+      "displayName": "Override defaults set in your Process Template .zip",
       "isExpanded": true
     }
   ],
@@ -57,6 +57,7 @@
       "label": "Process Template GUID Override",
       "defaultValue": "",
       "required": false,
+      "groupName":  "Overrides",
       "helpMarkDown": "The GUID of the process you would like to overwrite. Note that if there is significant diference between the in place template and the new one you will need to do a manual upload."
     }
   ],
