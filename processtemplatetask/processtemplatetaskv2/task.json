@@ -1,8 +1,8 @@
 {
   "id": "63823D31-810C-4957-9BC1-859757ACE94D",
   "name": "processtemplatetask",
-  "friendlyName": "VSTS Process Importer",
-  "description": "Deploys an XML Process to VSTS",
+  "friendlyName": "VSTS Process Import",
+  "description": "Imports an XML Process to VSTS.",
   "helpMarkDown": "v#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}# [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
   "category": "Deploy",
   "visibility": [
@@ -28,23 +28,15 @@
   ],
   "inputs": [
     {
-      "name": "processTemplateService",
-      "type": "connectedService:ProcessTemplateEndpoint",
-      "label": "end point",
+      "name": "VstsXmlProcessService",
+      "type": "connectedService:VstsXmlProcessEndpoint",
+      "label": "VSTS XML Process Endpoint",
       "defaultValue": "",
       "required": true,
-      "helpMarkDown": "Select the end point to use. If needed, click on 'manage', and add a new Service Endpoint of type 'Fabrikam server connection'"
+      "helpMarkDown": "The endpoint should contain both the Token for access as well a the URL of the VSTS Account that you want to connect to. You will need an endpoint per VSTS Account."
     },
     {
-      "name": "account",
-      "type": "string",
-      "label": "VSTS Account URL",
-      "defaultValue": "",
-      "required": true,
-      "helpMarkDown": "The URL of the VSTS instance to deploy the Template too. e.g. https://myaccount.visualstudio.com"
-    },
-    {
-      "name": "matchProcessTemplates",
+      "name": "processFile",
       "type": "filePath",
       "label": "Process Template",
       "defaultValue": "$(System.DefaultWorkingDirectory)\\*.zip",
@@ -52,19 +44,28 @@
       "helpMarkDown": "Search for one or more process templates to upload. Support wildcards."
     },
     {
-      "name": "overrideGuid",
+      "name": "overrideProcessGuid",
       "type": "string",
-      "label": "Process Template GUID Override",
+      "label": "Override Process GUID",
       "defaultValue": "",
       "required": false,
-      "groupName":  "Overrides",
+      "groupName": "Overrides",
       "helpMarkDown": "The GUID of the process you would like to overwrite. Note that if there is significant diference between the in place template and the new one you will need to do a manual upload."
+    },
+    {
+      "name": "overrideProcessName",
+      "type": "string",
+      "label": "Override Process Name",
+      "defaultValue": "",
+      "required": false,
+      "groupName": "Overrides",
+      "helpMarkDown": "Override the name of the Process so that you can tell the Imported ones apart since there is likley to be one per team project."
     }
   ],
-  "instanceNameFormat": "Uploads template to $(account)",
+  "instanceNameFormat": "Import $(overrideProcessName) for $(account)",
   "execution": {
     "PowerShell3": {
-      "target": "$(currentDirectory)\\upload-process-template.ps1",
+      "target": "$(currentDirectory)\\importProcess.ps1",
       "argumentFormat": "",
       "workingDirectory": "$(System.DefaultWorkingDirectory)"
     }

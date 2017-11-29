@@ -1,22 +1,27 @@
 [CmdletBinding()]
 param(
-    [string] $account,
+    [string] $accountURL,
     [string] $accesstoken,
-    [string] $matchProcessTemplates,
+    [string] $processFile,
     [string] $overrideGuid
 )
-$account = Get-VstsInput -Name account -Require
-$matchProcessTemplates = Get-VstsInput -Name matchProcessTemplates -Require
-$endpointName = Get-VstsInput -Name processTemplateService -Require
-$endpoint = Get-VstsEndpoint -Name $endpointName -Require
-$OverrideProcessTemplateGUID = Get-VstsInput -Name overrideGuid
+#Main Inputs
+$processServiceName = Get-VstsInput -Name VstsXmlProcessService -Require
+$processFile = Get-VstsInput -Name processFile -Require
+$overrideProcessGuid = Get-VstsInput -Name overrideProcessGuid
+$overrideProcessName = Get-VstsInput -Name overrideProcessName
+# EndPoint 
+$processServiceEndpoint = Get-VstsEndpoint -Name $processServiceName -Require
+$accesstoken = [string]$processServiceEndpoint.Auth.Parameters.ApiToken
+$accountURL = [string]$processServiceEndpoint.properties.url
 
-$accesstoken = [string]$endpoint.Auth.Parameters.ApiToken
+get-childitem -path env:*
 
-Write-VstsTaskVerbose "Account: $account" 
-Write-VstsTaskVerbose "matchProcessTemplates: $matchProcessTemplates" 
-Write-VstsTaskVerbose "accesstoken: $accesstoken" 
-Write-VstsTaskVerbose "GUID: $OverrideProcessTemplateGUID" 
+Write-VstsTaskVerbose "VSTS Account: $accountURL" 
+Write-VstsTaskVerbose "Process File: $processFile" 
+Write-VstsTaskVerbose "Acces Token: $accesstoken" 
+Write-VstsTaskVerbose "Process GUID: $overrideProcessGuid"
+Write-VstsTaskVerbose "Process Name: $overrideProcessName"
 
 
 #Write-Output "rootDirectory  " $rootDirectory
@@ -28,7 +33,7 @@ $headers.Add("X-TFS-FedAuthRedirect","Suppress")
 ##########################################
 # Get a List of Templates
 ##########################################
-$urllistprocess = "$($account)/_apis/process/processes?api-version=1.0"
+$urllistprocess = "$($accountURL)/_apis/process/processes?api-version=1.0"
 Write-VstsTaskVerbose "Calling $urllistprocess to get a list of current process templates."
 $templates = Invoke-RestMethod -Uri $urllistprocess -Headers $headers -ContentType "application/json" -Method Get;
 Try
@@ -45,7 +50,7 @@ Catch
     exit 999
 }
 # Write out the Tenplate list
-Write-VstsTaskVerbose "Returned $($templates.count) processe templates on $account"
+Write-VstsTaskVerbose "Returned $($templates.count) processe templates on $accountURL"
 foreach ($pt in $templates.value)
 {
     Write-Output "Found $($pt.name): $($pt.url)"
@@ -53,9 +58,9 @@ foreach ($pt in $templates.value)
 ##########################################
 # Fix Overrides
 ##########################################
-$file = Get-ChildItem $matchProcessTemplates
+$file = Get-ChildItem $processFile
 Write-VstsTaskVerbose $file
-if ($OverrideProcessTemplateGUID -ne $null )
+if ($overrideProcessGuid -ne $null )
 {
     Write-VstsTaskVerbose "***RUNNNING OVERIDES****"
     Add-Type -AssemblyName System.IO.Compression.FileSystem
@@ -65,8 +70,8 @@ if ($OverrideProcessTemplateGUID -ne $null )
     $xml = [xml](get-content $processFile)
     $guidXml = $xml.ProcessTemplate.metadata.version.Attributes.GetNamedItem("type")
     $guid = $guidXml.'#text'
-     Write-VstsTaskVerbose "Current GUID is $guid and we are replacing it with $OverrideProcessTemplateGUID before upload"
-    $guidXml.'#text' = $OverrideProcessTemplateGUID
+     Write-VstsTaskVerbose "Current GUID is $guid and we are replacing it with $overrideProcessGuid before upload"
+    $guidXml.'#text' = $overrideProcessGuid
     $xml.Save([string]$processFile)
     [System.IO.File]::Move($file, "$file.old")
     [System.IO.Compression.ZipFile]::CreateFromDirectory($workFolder,$file)
@@ -75,8 +80,8 @@ if ($OverrideProcessTemplateGUID -ne $null )
 ##########################################
 # Upload templates
 ##########################################
-#$urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
-$urlPublishProcess = "$($account)/_apis/work/processAdmin/processes/import?api-version=4.0-preview.1"
+#$urlPublishProcess = "$($accountURL)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
+$urlPublishProcess = "$($accountURL)/_apis/work/processAdmin/processes/import?api-version=4.0-preview.1"
 Write-Output "Uploading $file" 
 $result = Invoke-RestMethod -InFile $file -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
 Try
