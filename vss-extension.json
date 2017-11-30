@@ -88,8 +88,7 @@
             "type": "ms.vss-endpoint.endpoint-auth-scheme-token"
           }
         ],
-        "helpMarkDown": "<a href=\"http://vsts-process-template-management.readthedocs.io",
-        "target=\\\"_blank\\\"><b>Learn More</b></a>\""
+        "helpMarkDown": "<a href=\"http://vsts-process-template-management.readthedocs.io\" target=\"_blank\"><b>Learn More</b></a>"
       }
     }
   ]
