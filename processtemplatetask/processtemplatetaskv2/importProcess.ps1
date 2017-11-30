@@ -13,9 +13,10 @@ $overrideProcessName = Get-VstsInput -Name overrideProcessName
 # EndPoint 
 $processServiceEndpoint = Get-VstsEndpoint -Name $processServiceName -Require
 $accesstoken = [string]$processServiceEndpoint.Auth.Parameters.ApiToken
-$accountURL = [string]$processServiceEndpoint.properties.url
+$accountURL = [string]$processServiceEndpoint.Url
 
-get-childitem -path env:*
+get-childitem -path env:INPUT_*
+get-childitem -path env:ENDPOINT_*
 
 Write-VstsTaskVerbose "VSTS Account: $accountURL" 
 Write-VstsTaskVerbose "Process File: $processFile" 
@@ -60,20 +61,33 @@ foreach ($pt in $templates.value)
 ##########################################
 $file = Get-ChildItem $processFile
 Write-VstsTaskVerbose $file
-if ($overrideProcessGuid -ne $null )
+if ((($overrideProcessGuid -ne $null) -and ($overrideProcessGuid -ne "")) -or (($overrideProcessName -ne $null) -and ($overrideProcessName -ne "")))
 {
     Write-VstsTaskVerbose "***RUNNNING OVERIDES****"
     Add-Type -AssemblyName System.IO.Compression.FileSystem
     $workFolder = [System.IO.Path]::Combine($file.Directory.FullName, "template")
+    if (Test-Path $workFolder)
+    {
+        [System.IO.Directory]::Delete($workFolder, $true)
+    }
     [System.IO.Compression.ZipFile]::ExtractToDirectory($file, $workFolder)
     $processFile = "$workFolder\ProcessTemplate.xml"
     $xml = [xml](get-content $processFile)
-    $guidXml = $xml.ProcessTemplate.metadata.version.Attributes.GetNamedItem("type")
-    $guid = $guidXml.'#text'
-     Write-VstsTaskVerbose "Current GUID is $guid and we are replacing it with $overrideProcessGuid before upload"
-    $guidXml.'#text' = $overrideProcessGuid
+    if (($overrideProcessGuid -ne $null) -and ($overrideProcessGuid -ne ""))
+    {
+        $guidXml = $xml.ProcessTemplate.metadata.version.Attributes.GetNamedItem("type")
+        $guid = $guidXml.'#text'
+         Write-VstsTaskVerbose "Current GUID is $guid and we are replacing it with $overrideProcessGuid before upload"
+        $guidXml.'#text' = $overrideProcessGuid
+    }
+    if (($overrideProcessName -ne $null) -and ($overrideProcessName -ne ""))
+    {
+        $nameXML = $xml.ProcessTemplate.metadata.name
+         Write-VstsTaskVerbose "Current Name of the Process is $nameXML and we are replacing it with $overrideProcessName before upload"
+        $nameXML = $overrideProcessName
+    }
     $xml.Save([string]$processFile)
-    [System.IO.File]::Move($file, "$file.old")
+    [System.IO.File]::Delete($file)
     [System.IO.Compression.ZipFile]::CreateFromDirectory($workFolder,$file)
 }
 

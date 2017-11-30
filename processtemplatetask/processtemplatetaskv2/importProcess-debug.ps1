@@ -1,5 +1,5 @@
 ﻿#Save-Module -Name VstsTaskSdk -Path ..\processtemplatetask\processtemplatetaskv2\ps_modules\
-Set-Location C:\Users\MartinHinshelwoodnkd\source\repos\vsts-processtemplate-task\processtemplatetask\processtemplatetaskv2
+#Set-Location C:\Users\MartinHinshelwoodnkd\source\repos\vsts-processtemplate-task\processtemplatetask\processtemplatetaskv2
 Import-Module .\\ps_modules\VstsTaskSdk\VstsTaskSdk.psd1
 #Import-Module -Name VstsTaskSdk
 #### Usefull bits ##############
@@ -36,7 +36,7 @@ $env:ENDPOINT_AUTH_EP1 = "{ `"Parameters`": { `"ApiToken`": `"$($TestData.ApiTok
 $env:ENDPOINT_DATA_EP1 = '{ "Key1": "Value1", "Key2": "Value2" }'
 
 $env:INPUT_processFile = $TestData.processFile
-$env:INPUT_overrideProcessGuid = $TestData.overrideProcessGuid
+$env:INPUT_overrideProcessGuid = ""#$TestData.overrideProcessGuid
 $env:INPUT_overrideProcessName - $TestData.overrideProcessName
 Invoke-vstsTaskScript -scriptBlock { . .\importProcess.ps1 } -Verbose
 
