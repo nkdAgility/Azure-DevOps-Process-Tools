@@ -44,6 +44,22 @@
       "helpMarkDown": "Search for one or more process templates to upload. Support wildcards."
     },
     {
+      "name": "waitForUpdate",
+      "type": "boolean",
+      "label": "Wait on Status",
+      "defaultValue": "1",
+      "required": true,
+      "helpMarkDown": "If checked the task will poll "
+    },
+    {
+      "name": "waitForInterval",
+      "type": "string",
+      "label": "Check interval",
+      "defaultValue": "30",
+      "required": true,
+      "helpMarkDown": "If checked the task will poll the update service on the interval provided. Recommneded is 30 seconds."
+    },
+    {
       "name": "overrideProcessGuid",
       "type": "string",
       "label": "Override Process GUID",

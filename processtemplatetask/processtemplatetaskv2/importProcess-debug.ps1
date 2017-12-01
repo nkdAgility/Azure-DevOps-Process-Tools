@@ -17,6 +17,8 @@ if (!(Test-Path $TestDataFile))
   Add-Member -InputObject $TestDataPS -MemberType NoteProperty -Name processFile -Value "c:\temp\pt\SLM-PT-VSTS-2017.7.0.zip"
   Add-Member -InputObject $TestDataPS -MemberType NoteProperty -Name AccountURL -Value "https://xxx-xxx-devbox.visualstudio.com"
   Add-Member -InputObject $TestDataPS -MemberType NoteProperty -Name ApiToken -Value "mytoken"
+  Add-Member -InputObject $TestDataPS -MemberType NoteProperty -Name waitForUpdate -Value $true
+  Add-Member -InputObject $TestDataPS -MemberType NoteProperty -Name waitForInterval -Value 10
   Add-Member -InputObject $TestDataPS -MemberType NoteProperty -Name overrideProcessGuid -Value ""
   Add-Member -InputObject $TestDataPS -MemberType NoteProperty -Name overrideProcessName -Value ""
   $TestDataJson = ConvertTo-Json $TestDataPS
@@ -36,7 +38,9 @@ $env:ENDPOINT_AUTH_EP1 = "{ `"Parameters`": { `"ApiToken`": `"$($TestData.ApiTok
 $env:ENDPOINT_DATA_EP1 = '{ "Key1": "Value1", "Key2": "Value2" }'
 
 $env:INPUT_processFile = $TestData.processFile
-$env:INPUT_overrideProcessGuid = ""#$TestData.overrideProcessGuid
-$env:INPUT_overrideProcessName - $TestData.overrideProcessName
+$env:INPUT_waitForUpdate = $TestData.waitForUpdate
+$env:INPUT_waitForInterval = $TestData.waitForInterval
+$env:INPUT_overrideProcessGuid = $TestData.overrideProcessGuid
+$env:INPUT_overrideProcessName = $TestData.overrideProcessName
 Invoke-vstsTaskScript -scriptBlock { . .\importProcess.ps1 } -Verbose
 
