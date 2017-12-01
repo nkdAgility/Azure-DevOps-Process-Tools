@@ -78,10 +78,10 @@
       "id": "vstsProcess-endpoint",
       "description": "Service Endpoint for XML Process Uploads",
       "type": "ms.vss-endpoint.service-endpoint-type",
+      "url": "https://myaccount.visualstudio.com",
       "targets": [ "ms.vss-endpoint.endpoint-types" ],
       "properties": {
         "name": "VstsXmlProcessEndpoint",
-        "url": "https://myaccount.visualstudio.com",
         "displayName": "VSTS XML Process Endpoint",
         "authenticationSchemes": [
           {
