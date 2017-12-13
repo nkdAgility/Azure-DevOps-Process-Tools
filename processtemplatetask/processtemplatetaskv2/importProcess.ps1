@@ -84,7 +84,7 @@ if ((($overrideProcessGuid -ne $null) -and ($overrideProcessGuid -ne "")) -or ((
     {
         $nameXML = $xml.ProcessTemplate.metadata.name
          Write-VstsTaskVerbose "Current Name of the Process is $nameXML and we are replacing it with $overrideProcessName before upload"
-        $nameXML = $overrideProcessName
+        $xml.ProcessTemplate.metadata.name = $overrideProcessName
     }
     $xml.Save([string]$processFile)
     [System.IO.File]::Delete($file)
