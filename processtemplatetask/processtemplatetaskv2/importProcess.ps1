@@ -114,17 +114,28 @@ if ($importResult.validationResults.Count -eq 0)
 ##########################################
 If ($waitForUpdate)
 {
-    $successful = $false
+    $pending = 0
     $promoteJobId= $importResult.promoteJobId
-    $urlStatusCheck = "$($accountURL)/_apis/work/processadmin/processes/status/{0}?id={0}&api-version=4.1-preview" -f $promoteJobId
-
-    While ($successful -eq $false) 
+    $id = $importResult.Id
+    $urlStatusCheck = "$($accountURL)/_apis/work/processadmin/processes/status/{0}?id={1}&api-version=4.1-preview" -f $id, $promoteJobId
+    While ($pending -gt 0) 
     {
         $statusResult = Invoke-RestMethod -Uri $urlStatusCheck -Headers $headers -ContentType "application/json" -Method Get;
-        Write-Output "Still in progress"
+        Write-Output "Still in progress finished {0} of {1} Team Projects and there are {2} remaining retries" $statusResult.complete, $statusResult.pending, $statusResult.remainingRetries 
+        $pending = $statusResult.pending
         $successful = $statusResult.successful
         Start-Sleep -s $waitForInterval * 60
    }
+   if ($statusResult.successful)
+   {
+    Write-Output "Completed sucessfully with {0} Team Projects updated "
+   }
+   else
+   {
+     Write-Output "Completed unsucessfully with {0} Team Projects updated "
+     exit 1
+   }
+   
 }
 
 
