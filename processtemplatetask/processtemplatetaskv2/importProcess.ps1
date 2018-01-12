@@ -63,43 +63,43 @@ foreach ($pt in $templates.value)
 ##########################################
 $file = Get-ChildItem $processFile
 Write-VstsTaskVerbose $file
-if ((($overrideProcessGuid -ne $null) -and ($overrideProcessGuid -ne "")) -or (($overrideProcessName -ne $null) -and ($overrideProcessName -ne "")))
+Write-VstsTaskVerbose "***RUNNNING OVERIDES****"
+Add-Type -AssemblyName System.IO.Compression.FileSystem
+$workFolder = [System.IO.Path]::Combine($file.Directory.FullName, "template")
+############ UNPACK
+if (Test-Path $workFolder)
 {
-    Write-VstsTaskVerbose "***RUNNNING OVERIDES****"
-    Add-Type -AssemblyName System.IO.Compression.FileSystem
-    $workFolder = [System.IO.Path]::Combine($file.Directory.FullName, "template")
-    if (Test-Path $workFolder)
-    {
-        [System.IO.Directory]::Delete($workFolder, $true)
-    }
-    [System.IO.Compression.ZipFile]::ExtractToDirectory($file, $workFolder)
-    $processFile = "$workFolder\ProcessTemplate.xml"
-    $xml = [xml](get-content $processFile)
-    if (($overrideProcessGuid -ne $null) -and ($overrideProcessGuid -ne ""))
-    {
-        $guidXml = $xml.ProcessTemplate.metadata.version.Attributes.GetNamedItem("type")
-        $guid = $guidXml.'#text'
-         Write-VstsTaskVerbose "Current GUID is $guid and we are replacing it with $overrideProcessGuid before upload"
-        $guidXml.'#text' = $overrideProcessGuid
-    }
-    if (($overrideProcessName -ne $null) -and ($overrideProcessName -ne ""))
-    {
-        $nameXML = $xml.ProcessTemplate.metadata.name
-         Write-VstsTaskVerbose "Current Name of the Process is $nameXML and we are replacing it with $overrideProcessName before upload"
-        $nameXML = $overrideProcessName
-    }
-    $xml.Save([string]$processFile)
-    [System.IO.File]::Delete($file)
-    [System.IO.Compression.ZipFile]::CreateFromDirectory($workFolder,$file)
+    [System.IO.Directory]::Delete($workFolder, $true)
 }
-
+[System.IO.Compression.ZipFile]::ExtractToDirectory($file, $workFolder)
+############ CHANGE
+$processFile = "$workFolder\ProcessTemplate.xml"
+$processFileXml = [xml](get-content $processFile)
+if (($overrideProcessGuid -ne $null) -and ($overrideProcessGuid -ne ""))
+{
+    $guidXml = $processFileXml.ProcessTemplate.metadata.version.Attributes.GetNamedItem("type")
+    $guid = $guidXml.'#text'
+    Write-VstsTaskVerbose "Current GUID is $guid and we are replacing it with $overrideProcessGuid before upload"
+    $guidXml.'#text' = $overrideProcessGuid
+    $processFileXml.Save([string]$processFile)
+}
+ if (($overrideProcessName -ne $null) -and ($overrideProcessName -ne ""))
+{
+    $nameXML = $processFileXml.ProcessTemplate.metadata.name
+    Write-VstsTaskVerbose "Current Name of the Process is $nameXML and we are replacing it with $overrideProcessName before upload"
+    $nameXML = $overrideProcessName
+    $processFileXml.Save([string]$processFile)
+}
+############ REPACK
+[System.IO.File]::Delete($file)
+[System.IO.Compression.ZipFile]::CreateFromDirectory($workFolder,$file)
 ##########################################
 # Upload templates
 ##########################################
 #$urlPublishProcess = "$($accountURL)/_apis/work/processAdmin/processes/import?ignoreWarnings=true&api-version=2.2-preview"
 $urlPublishProcess = "$($accountURL)/_apis/work/processAdmin/processes/import?api-version=4.0-preview.1"
 Write-Output "Uploading $file" 
-$importResult = Invoke-RestMethod -InFile $file -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post;
+$importResult = Invoke-RestMethod -InFile $file -Uri $urlPublishProcess -Headers $headers -ContentType "application/zip" -Method Post #-Proxy "http://127.0.0.1:8888";
 if ($importResult.validationResults.Count -eq 0)
 {
     Write-Output "$($file.Name) sucessfully validated and job is queued"
@@ -114,17 +114,22 @@ if ($importResult.validationResults.Count -eq 0)
 ##########################################
 If ($waitForUpdate)
 {
-    $pending = 0
+    $waitForJob = 1
     $promoteJobId= $importResult.promoteJobId
     $id = $importResult.Id
-    $urlStatusCheck = "$($accountURL)/_apis/work/processadmin/processes/status/{0}?id={1}&api-version=4.1-preview" -f $id, $promoteJobId
-    While ($pending -gt 0) 
+    $urlStatusCheck = "$($accountURL)/_apis/work/processadmin/processes/status/{0}?id={1}&api-version=4.1-preview" -f $id, $promoteJobId #<-- Does not work
+    
+    While ($waitForJob -eq 1) 
     {
-        $statusResult = Invoke-RestMethod -Uri $urlStatusCheck -Headers $headers -ContentType "application/json" -Method Get;
+        $statusResult = Invoke-RestMethod -Uri $urlStatusCheck -Headers $headers -ContentType "application/json" -Method Get #-Proxy "http://127.0.0.1:8888";
         Write-Output "Still in progress finished {0} of {1} Team Projects and there are {2} remaining retries" $statusResult.complete, $statusResult.pending, $statusResult.remainingRetries 
         $pending = $statusResult.pending
         $successful = $statusResult.successful
-        Start-Sleep -s $waitForInterval * 60
+        Start-Sleep -s ($waitForInterval * 60)
+        if ($successful -eq 1)
+        {
+         $waitForJob = 0
+        }
    }
    if ($statusResult.successful)
    {
