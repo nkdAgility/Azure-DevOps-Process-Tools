@@ -15,8 +15,8 @@
   "author": "naked Agility Limited - Martin Hinshelwood",
   "version": {
     "Major": "2",
-    "Minor": "2",
-    "Patch": "0"
+    "Minor": "3",
+    "Patch": "7"
   },
   "minimumAgentVersion": "1.92.0",
   "groups": [
