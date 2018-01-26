@@ -115,20 +115,24 @@ if ($importResult.validationResults.Count -eq 0)
 If ($waitForUpdate)
 {
     $waitForJob = 1
+    $startTime = $(get-date)
     $promoteJobId= $importResult.promoteJobId
     $id = $importResult.Id
     $urlStatusCheck = "$($accountURL)/_apis/work/processadmin/processes/status/{0}?id={1}&api-version=4.1-preview" -f $id, $promoteJobId #<-- Does not work
     
     While ($waitForJob -eq 1) 
     {
+        $elapsedTime = new-timespan $startTime
         $statusResult = Invoke-RestMethod -Uri $urlStatusCheck -Headers $headers -ContentType "application/json" -Method Get #-Proxy "http://127.0.0.1:8888";
-        Write-Output "Still in progress finished {0} of {1} Team Projects and there are {2} remaining retries" $statusResult.complete, $statusResult.pending, $statusResult.remainingRetries 
-        $pending = $statusResult.pending
+        Write-Output ("Job Running {0}h:{1}s | Pending {2} | Complete {3} | Retries {4}" -f [int]$elapsedTime.TotalMinutes, $elapsedTime.Seconds, $statusResult.complete, $statusResult.pending, $statusResult.remainingRetries)
         $successful = $statusResult.successful
-        Start-Sleep -s ($waitForInterval * 60)
         if ($successful -eq 1)
         {
          $waitForJob = 0
+        }
+        else
+        {
+          Start-Sleep -s ([int]$waitForInterval)
         }
    }
    if ($statusResult.successful)
