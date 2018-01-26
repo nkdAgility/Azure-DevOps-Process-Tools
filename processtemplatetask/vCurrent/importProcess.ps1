@@ -124,7 +124,7 @@ If ($waitForUpdate)
     {
         $elapsedTime = new-timespan $startTime
         $statusResult = Invoke-RestMethod -Uri $urlStatusCheck -Headers $headers -ContentType "application/json" -Method Get #-Proxy "http://127.0.0.1:8888";
-        Write-Output ("Job Running {0}h:{1}s | Pending {2} | Complete {3} | Retries {4}" -f [int]$elapsedTime.TotalMinutes, $elapsedTime.Seconds, $statusResult.complete, $statusResult.pending, $statusResult.remainingRetries)
+        Write-Output ("Job Running {0}m:{1}s | Complete {2} | Pending {3} | Retries {4}" -f [int]$elapsedTime.TotalMinutes, $elapsedTime.Seconds, $statusResult.complete, $statusResult.pending, $statusResult.remainingRetries)
         $successful = $statusResult.successful
         if ($successful -eq 1)
         {
@@ -137,11 +137,12 @@ If ($waitForUpdate)
    }
    if ($statusResult.successful)
    {
-    Write-Output "Completed sucessfully with {0} Team Projects updated "
+    Write-Output ("Job Finished Sucess {0}m:{1}s | Complete {2} | Pending {3} | Retries remaining {4}" -f [int]$elapsedTime.TotalMinutes, $elapsedTime.Seconds, $statusResult.complete, $statusResult.pending, $statusResult.remainingRetries)
    }
    else
    {
-     Write-Output "Completed unsucessfully with {0} Team Projects updated "
+     Write-VstsTaskError ("Job Failed {0}m:{1}s | Complete {2} | Pending {3} | Retries remaining {4}" -f [int]$elapsedTime.TotalMinutes, $elapsedTime.Seconds, $statusResult.complete, $statusResult.pending, $statusResult.remainingRetries)
+     Write-VstsTaskError $statusResult
      exit 1
    }
    
