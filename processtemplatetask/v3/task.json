@@ -3,7 +3,7 @@
   "name": "processtemplatetask",
   "friendlyName": "VSTS Process Import",
   "description": "Imports an XML Process to VSTS.",
-  "helpMarkDown": "v#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}# [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
+  "helpMarkDown": "v3.0.1 [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
   "category": "Deploy",
   "visibility": [
     "Build",
@@ -14,9 +14,9 @@
   ],
   "author": "naked Agility Limited - Martin Hinshelwood",
   "version": {
-    "Major": "#{GitVersion.Major}#",
-    "Minor": "#{GitVersion.Minor}#",
-    "Patch": "#{GitVersion.Patch}#"
+    "Major": "3",
+    "Minor": "0",
+    "Patch": "1"
   },
   "minimumAgentVersion": "1.92.0",
   "groups": [
