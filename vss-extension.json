@@ -64,6 +64,12 @@
   "screenshots": [
     {
       "path": "images/screenshot-01.png"
+    },
+    {
+      "path": "images/screenshot-02.png"
+    },
+    {
+      "path": "images/screenshot-03.png"
     }
   ],
   "content": {
