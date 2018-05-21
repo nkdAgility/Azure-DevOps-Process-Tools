@@ -27,16 +27,32 @@
     "upload"
   ],
   "links": {
+    "home": {
+      "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/"
+    },
+    "getstarted": {
+      "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/_wiki/wikis/VSTS-Sync-Migrator-Docs?pagePath=%2Fgetting%20started"
+    },
     "learn": {
-      "uri": "http://vsts-process-template-management.readthedocs.io"
+      "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/_wiki/wikis/vsts-processtemplate-task"
     },
     "support": {
+      "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/_workitems"
+    },
+    "repository": {
+      "uri": "https://nkdagility.visualstudio.com/DefaultCollection/vsts-processtemplate-task/_git/vsts-sync-migrator"
+    },
+    "issues": {
       "uri": "https://github.com/nkdAgility/vsts-process-template-manager/issues"
     }
   },
+  "CustomerQnASupport": {
+    "enableqna": "true",
+    "url": "https://github.com/nkdAgility/vsts-process-template-manager/issues"
+  },
   "repository": {
     "type": "git",
-    "uri": "https://github.com/nkdAgility/vsts-process-template-manager"
+    "uri": "https://nkdagility.visualstudio.com/DefaultCollection/vsts-processtemplate-task/_git/vsts-sync-migrator"
   },
   "icons": {
     "default": "images/extension-icon.png"
