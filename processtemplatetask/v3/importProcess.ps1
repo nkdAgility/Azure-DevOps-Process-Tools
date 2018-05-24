@@ -134,7 +134,7 @@ If ($waitForUpdate)
           Start-Sleep -s ([int]$waitForInterval)
         }
    }
-   if ($statusResult.successful)
+   if ($statusResult.successful -and ($statusResult.pending -eq 0))
    {
     Write-Output ("Job Finished Sucess {0}m:{1}s | Complete {2} | Pending {3} | Retries remaining {4}" -f [int]$elapsedTime.TotalMinutes, $elapsedTime.Seconds, $statusResult.complete, $statusResult.pending, $statusResult.remainingRetries)
    }
