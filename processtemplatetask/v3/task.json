@@ -1,7 +1,7 @@
 {
   "id": "63823D31-810C-4957-9BC1-859757ACE94D",
   "name": "processtemplatetask",
-  "friendlyName": "VSTS Process Import",
+  "friendlyName": "VSTS XML Process Import",
   "description": "Imports an XML Process to VSTS.",
   "helpMarkDown": "v3.0.1 [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
   "category": "Deploy",
