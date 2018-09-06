@@ -121,7 +121,7 @@
       "targets": [ "ms.vss-endpoint.endpoint-types" ],
       "properties": {
         "name": "VstsXmlProcessEndpoint",
-        "displayName": "VSTS XML Process Endpoint",
+        "displayName": "VSTS Organisation (was Account)",
         "authenticationSchemes": [
           {
             "type": "ms.vss-endpoint.endpoint-auth-scheme-token"
