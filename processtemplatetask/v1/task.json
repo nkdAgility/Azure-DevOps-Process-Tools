@@ -1,9 +1,9 @@
 {
   "id": "63823D31-810C-4957-9BC1-859757ACE94D",
   "name": "processtemplate",
-  "friendlyName": "VSTS XML Process Import",
-  "description": "Deploys an XML Process to VSTS",
-  "helpMarkDown": "v1.10.0 Final - Move to v2 [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
+  "friendlyName": "[DEPRICATED] VSTS XML Process Import",
+  "description": "[DEPRICATED] Deploys an XML Process to VSTS",
+  "helpMarkDown": "v1.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}#2 [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
   "category": "Deploy",
   "visibility": [
     "Build",
@@ -11,9 +11,9 @@
   ],
   "author": "Martin Hinshelwood",
   "version": {
-    "Major": 1,
-    "Minor": 10,
-    "Patch": 0
+    "Major": "1",
+    "Minor": "#{GitVersion.Minor}#",
+    "Patch": "#{GitVersion.Patch}#"
   },
   "minimumAgentVersion": "1.92.0",
   "groups": [
