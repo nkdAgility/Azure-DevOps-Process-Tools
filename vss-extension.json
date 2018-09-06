@@ -14,7 +14,7 @@
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "description": "Incudes tasks to help you manage your Processes (was Process Templates) in VSTS.",
+  "description": "Incudes tasks to help you manage your Processes (was Process Templates) in VSTS. Supports both XML Process and the new Inherited Process.",
   "categories": [
     "Build and release"
   ],
@@ -23,8 +23,12 @@
     "build",
     "process",
     "process template",
+    "xml process",
     "template",
-    "upload"
+    "upload",
+    "import",
+    "export",
+    "migrate"
   ],
   "links": {
     "home": {
@@ -40,7 +44,7 @@
       "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/_workitems"
     },
     "repository": {
-      "uri": "https://nkdagility.visualstudio.com/DefaultCollection/vsts-processtemplate-task/_git/vsts-sync-migrator"
+      "uri": "https://github.com/nkdAgility/vsts-process-template-manager"
     },
     "issues": {
       "uri": "https://github.com/nkdAgility/vsts-process-template-manager/issues"
