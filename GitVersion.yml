@@ -6,7 +6,5 @@ branches:
   master:
     mode: ContinuousDeployment
     tag: ''
-  ((?!(master)|(feature)|(pull)).):
-     tag: 'Preview'
 ignore:
   sha: []
