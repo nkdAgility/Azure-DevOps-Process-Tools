@@ -41,7 +41,7 @@
       "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/_wiki/wikis/vsts-processtemplate-task"
     },
     "support": {
-      "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/_workitems"
+      "uri": "https://github.com/nkdAgility/vsts-process-template-manager/issues"
     },
     "repository": {
       "uri": "https://github.com/nkdAgility/vsts-process-template-manager"
@@ -56,7 +56,7 @@
   },
   "repository": {
     "type": "git",
-    "uri": "https://nkdagility.visualstudio.com/DefaultCollection/vsts-processtemplate-task/_git/vsts-sync-migrator"
+    "uri": "https://github.com/nkdAgility/vsts-process-template-manager.git"
   },
   "icons": {
     "default": "images/extension-icon.png"
@@ -87,6 +87,9 @@
   "files": [
     {
       "path": "processtemplatetask"
+    },
+    {
+      "path": "inheritedprocessmigration"
     }
   ],
   "contributions": [
@@ -98,6 +101,16 @@
       ],
       "properties": {
         "name": "processtemplatetask"
+      }
+    },
+    {
+      "id": "ineritedprocessmigration-task",
+      "type": "ms.vss-distributed-task.task",
+      "targets": [
+        "ms.vss-distributed-task.tasks"
+      ],
+      "properties": {
+        "name": "ineritedprocessmigration"
       }
     },
     {

@@ -15,7 +15,7 @@
   ],
   "author": "naked Agility Limited - Martin Hinshelwood",
   "version": {
-    "Major": "4",
+    "Major": "#{GitVersion.Major}#",
     "Minor": "#{GitVersion.Minor}#",
     "Patch": "#{GitVersion.Patch}#"
   },
