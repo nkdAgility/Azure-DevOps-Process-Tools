@@ -3,7 +3,7 @@
   "name": "processtemplatetask",
   "friendlyName": "VSTS XML Process Import",
   "description": "Imports an XML Process to VSTS.",
-  "helpMarkDown": "v4.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}# [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
+  "helpMarkDown": "v4.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}# [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
   "category": "Deploy",
   "visibility": [
     "Build",
