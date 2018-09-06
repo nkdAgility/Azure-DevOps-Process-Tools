@@ -23,7 +23,7 @@
   "groups": [
     {
       "name": "options",
-      "displayName": "Additional options",
+      "displayName": "Options",
       "isExpanded": true
     }
   ],
@@ -33,12 +33,12 @@
       "type": "picklist",
       "label": "Command",
       "required": true,
-      "defaultValue": "filePath",
+      "defaultValue": "migrate",
       "helpMarkDown": "Migration execution type: migrate / import / export",
       "options": {
-        "migrate": "File Path",
-        "export": "Inline",
-        "import": "Import"
+        "migrate": "migrate",
+        "export": "export",
+        "import": "import"
       }
     },
     {
