@@ -48,7 +48,7 @@
       "defaultValue": "",
       "required": true,
       "helpMarkDown": "Source account endpoint. Required in export/migrate mode, ignored in import mode.",
-      "visibleRule": "command = migrate && command = export"
+      "visibleRule": "command = migrate || command = export"
     },
     {
       "name": "sourceProcessName",
@@ -56,7 +56,7 @@
       "label": "Source Process Name",
       "helpMarkDown": "Source process name to export. Required in export/migrate mode, ignored in import mode.",
       "required": "false",
-      "visibleRule": "command = migrate && command = export"
+      "visibleRule": "command = migrate || command = export"
     },
     {
       "name": "targetAccount",
@@ -65,7 +65,7 @@
       "defaultValue": "",
       "required": true,
       "helpMarkDown": "Target account endpoint. Required in import/migrate mode, ignored in export mode. ",
-      "visibleRule": "command = migrate && command = import"
+      "visibleRule": "command = migrate || command = import"
     },
     {
       "name": "targetProcessName",
@@ -73,7 +73,7 @@
       "label": "Target Process Name",
       "helpMarkDown": "Target process name to export. Required in import/migrate mode, ignored in import mode.",
       "required": "false",
-      "visibleRule": "command = migrate && command = import"
+      "visibleRule": "command = migrate || command = import"
     },
     {
       "name": "processFilename",
