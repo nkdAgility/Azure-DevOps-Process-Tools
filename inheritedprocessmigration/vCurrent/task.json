@@ -17,7 +17,7 @@
   "version": {
     "Major": "1",
     "Minor": "#{GitVersion.Minor}#",
-    "Patch": "#{GitVersion.Patch}#"
+    "Patch": "#{GitVersion.Patch}##{GitVersion.COMMITSSINCEVERSIONSOURCE}#"
   },
   "minimumAgentVersion": "1.92.0",
   "groups": [
@@ -48,7 +48,7 @@
       "defaultValue": "",
       "required": true,
       "helpMarkDown": "Source account endpoint. Required in export/migrate mode, ignored in import mode.",
-      "visibleRule": "command = migrate && command = export"
+      "visibleRule": "command = migrate || command = export"
     },
     {
       "name": "sourceProcessName",
@@ -56,7 +56,7 @@
       "label": "Source Process Name",
       "helpMarkDown": "Source process name to export. Required in export/migrate mode, ignored in import mode.",
       "required": "false",
-      "visibleRule": "command = migrate && command = export"
+      "visibleRule": "command = migrate || command = export"
     },
     {
       "name": "targetAccount",
@@ -65,15 +65,15 @@
       "defaultValue": "",
       "required": true,
       "helpMarkDown": "Target account endpoint. Required in import/migrate mode, ignored in export mode. ",
-      "visibleRule": "command = migrate && command = import"
+      "visibleRule": "command = migrate || command = import"
     },
     {
       "name": "targetProcessName",
       "type": "string",
       "label": "Target Process Name",
       "helpMarkDown": "Target process name to export. Required in import/migrate mode, ignored in import mode.",
-      "required": "false",
-      "visibleRule": "command = migrate && command = import"
+      "required": true,
+      "visibleRule": "command = migrate || command = import"
     },
     {
       "name": "processFilename",
@@ -81,8 +81,8 @@
       "label": "Process Filename",
       "defaultValue": "",
       "helpMarkDown": "File with process payload. Required in import mode, optional for export/migrate mode.",
-      "required": false,
-      "groupName": "options"
+      "required": true,
+      "visibleRule": "command = import"
     },
     {
       "name": "logLevel",
@@ -91,7 +91,7 @@
       "defaultValue": "Verbose",
       "helpMarkDown": "Optional, log level for console. Possibe values are 'Verbose'/'Information'/'Warning'/'Error'.",
       "required": "false",
-      "groupName": "packAdvanced",
+      "groupName": "options",
       "options": {
         "Verbose": "Verbose",
         "Information": "Information",

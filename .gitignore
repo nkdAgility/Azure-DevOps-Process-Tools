@@ -5,3 +5,4 @@ _build/
 _packages/
 /.vs
 tests/data/
+/inheritedprocessmigration/vCurrent/configuration.json
