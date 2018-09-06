@@ -104,13 +104,13 @@
       }
     },
     {
-      "id": "ineritedprocessmigration-task",
+      "id": "inheritedprocessmigration-task",
       "type": "ms.vss-distributed-task.task",
       "targets": [
         "ms.vss-distributed-task.tasks"
       ],
       "properties": {
-        "name": "ineritedprocessmigration"
+        "name": "inheritedprocessmigration"
       }
     },
     {
