@@ -24,13 +24,13 @@ $logLevel = Get-VstsInput -Name logLevel -Require
 # logFilename
 $logFilename = Get-VstsInput -Name logFilename -Require
 # overwritePicklist
-$overwritePicklist = Get-VstsInput -Name overwritePicklist -Require
+$overwritePicklist = Get-VstsInput -Name overwritePicklist -Require -AsBool
 # continueOnRuleImportFailure
-$continueOnRuleImportFailure = Get-VstsInput -Name continueOnRuleImportFailure -Require
+$continueOnRuleImportFailure = Get-VstsInput -Name continueOnRuleImportFailure -Require -AsBool
 # continueOnFieldDefaultValueFailure
-$continueOnFieldDefaultValueFailure = Get-VstsInput -Name continueOnFieldDefaultValueFailure -Require
+$continueOnFieldDefaultValueFailure = Get-VstsInput -Name continueOnFieldDefaultValueFailure -Require -AsBool
 # skipImportFormContributions
-$skipImportFormContributions = Get-VstsInput -Name skipImportFormContributions -Require
+$skipImportFormContributions = Get-VstsInput -Name skipImportFormContributions -Require -AsBool
 
 get-childitem -path env:INPUT_*
 get-childitem -path env:ENDPOINT_*
@@ -40,6 +40,11 @@ Write-VstsTaskVerbose "sourceAccountUrl: $sourceAccountUrl"
 Write-VstsTaskVerbose "targetProcessName: $targetProcessName" 
 Write-VstsTaskVerbose "targetAccountUrl: $targetAccountUrl" 
 Write-VstsTaskVerbose "targetProcessName: $targetProcessName" 
+Write-VstsTaskVerbose "overwritePicklist: $overwritePicklist" 
+Write-VstsTaskVerbose "continueOnRuleImportFailure: $continueOnRuleImportFailure" 
+Write-VstsTaskVerbose "continueOnFieldDefaultValueFailure: $continueOnFieldDefaultValueFailure" 
+Write-VstsTaskVerbose "skipImportFormContributions: $skipImportFormContributions" 
+
 
 ###########################################################
 
@@ -62,10 +67,10 @@ if (!(Test-Path $configFile))
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name processFilename -Value $processFilename
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name logLevel -Value $logLevel
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name logFilename -Value $logFilename
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name overwritePicklist -Value [bool]$overwritePicklist
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnRuleImportFailure -Value [bool]$continueOnRuleImportFailure
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnFieldDefaultValueFailure -Value [bool]$continueOnFieldDefaultValueFailure
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty] -Name skipImportFormContributions -Value [bool]$skipImportFormContributions
+    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name overwritePicklist -Value $overwritePicklist
+    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnRuleImportFailure -Value $continueOnRuleImportFailure
+    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnFieldDefaultValueFailure -Value $continueOnFieldDefaultValueFailure
+    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name skipImportFormContributions -Value $skipImportFormContributions
 
     Add-Member -InputObject $configObject -MemberType NoteProperty -Name options -Value $configOptionsObject
 
@@ -85,6 +90,12 @@ npm install process-migrator -g
 
 Write-VstsTaskVerbose $command
 
-process-migrator --mode $command --config $configFile
+if ($command -eq "migrate") {
+  process-migrator
+} else {
+  process-migrator --mode $command
+}
+
+
 
 
