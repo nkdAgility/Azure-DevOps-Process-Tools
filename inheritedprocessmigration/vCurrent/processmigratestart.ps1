@@ -85,6 +85,6 @@ npm install process-migrator -g
 
 Write-VstsTaskVerbose $command
 
-process-migrator --mode $command --config $configFile
+process-migrator --mode=$command --config=$configFile
 
 
