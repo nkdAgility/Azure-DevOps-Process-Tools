@@ -20,7 +20,7 @@ $accountURL = [string]$processServiceEndpoint.Url
 get-childitem -path env:INPUT_*
 get-childitem -path env:ENDPOINT_*
 
-Write-VstsTaskVerbose "VSTS Account: $accountURL" 
+Write-VstsTaskVerbose "Azure DevOps Service Organisation: $accountURL" 
 Write-VstsTaskVerbose "Process File: $processFile" 
 Write-VstsTaskVerbose "Acces Token: $accesstoken" 
 Write-VstsTaskVerbose "Process GUID: $overrideProcessGuid"

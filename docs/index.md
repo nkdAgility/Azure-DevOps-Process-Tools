@@ -1,12 +1,25 @@
-# VSTS Process Template Manager
+# Azure DevOps Process Tools [![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/version-short/nkdagility.processtemplate.svg)](https://marketplace.visualstudio.com/items?itemName=nkdagility.processtemplate)
 
-Get the [VSTS Process Template Management](https://marketplace.visualstudio.com/items?itemName=nkdagility.processtemplate) extensions for VSTS from the Marketplace.
+This task automates the Process of managing your Process changes from source control to Azure DevOps so that you can keep all your projects in sync. 
 
-This task automates the Process of uploading your Process Template changes from source control to VSTS so that you can keep all your projects in sync. 
+One of the largest issues for Enterprise is everyone using a different process template for their projects. When you move your Collection to Azure DevOps with your custom Process Template you get a "Phase 1 enabled account". This account does not let you edit the Process Template in the UI and instead lets you download and upload the process template.
 
-One of the largest issues for Enterprise is everyone using a different process template for their projects. When you move your Collection to VSTS with your custom Process Template you get a "Phase 1 enabled account". This account does not let you edit the Process Template in the UI and instead lets you download and upload the process template.
+These build tasks allow you to manage both the XML and Inherited processes in Azure DevOps Services. You can use this task to create a controlled exposure CI/CD Pipeline that deploys and manages your process between Organisations.
 
-This Build Task lets you upload a local template into VSTS.
+
+## What can you do with this tool?
+
+- **Azure DevOps Services Process (XML)** Task - Upload XML Based Process from an export
+- **Azure DevOps Services Process (Inherited)** Task - Migrate Inherited Process(s) between Organisations (uses [https://github.com/Microsoft/process-migrator](https://github.com/Microsoft/process-migrator))
+
+![Screenshot of Process Uploader](/images/screenshot-01.png)
+
+Full documentation is available on [https://dev.azure.com/nkdagility/vsts-processtemplate-task/](https://dev.azure.com/nkdagility/vsts-processtemplate-task/)
+
+## Getting the Tools
+
+ You can [install from the Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=nkdagility.processtemplate) 
+
 
 ## Puting your Template under source control
 
@@ -14,7 +27,7 @@ After you have had your collection imported to VSTS by Microsoft you will be abl
 
 ![List all Process Templates](./assets/vsts-process-template-management-admin.png)
 
-Go to the home page of your VSTS account and head over to "MyAccountName | Account Settings | Process", where you will see a list of the available process templates. 
+Go to the home page of your Azure DevOps Service Organisation and head over to "MyAccountName | Account Settings | Process", where you will see a list of the available process templates. 
 
 ![Export Process Templates](./assets/vsts-process-template-management-export.png)
 
