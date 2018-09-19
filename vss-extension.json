@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "processtemplate",
-  "name": "VSTS Process Tools",
+  "name": "Azure DevOps Process Tools",
   "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}##{GitVersion.COMMITSSINCEVERSIONSOURCE}#",
   "public": false,
   "publisher": "nkdAgility",
@@ -14,7 +14,7 @@
       "id": "Microsoft.VisualStudio.Services"
     }
   ],
-  "description": "Incudes tasks to help you manage your Processes (was Process Templates) in VSTS. Supports both XML Process and the new Inherited Process.",
+  "description": "Incudes tasks to help you manage your Processes (was Process Templates) in Azure DevOps Services. Supports both XML Process and the new Inherited Process.",
   "categories": [
     "Build and release"
   ],
@@ -32,13 +32,13 @@
   ],
   "links": {
     "home": {
-      "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/"
+      "uri": "https://dev.azure.com/nkdagility/vsts-processtemplate-task/"
     },
     "getstarted": {
-      "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/_wiki/wikis/VSTS-Sync-Migrator-Docs?pagePath=%2Fgetting%20started"
+      "uri": "https://dev.azure.com/nkdagility/vsts-processtemplate-task/_wiki/wikis/VSTS-Sync-Migrator-Docs?pagePath=%2Fgetting%20started"
     },
     "learn": {
-      "uri": "https://nkdagility.visualstudio.com/vsts-processtemplate-task/_wiki/wikis/vsts-processtemplate-task"
+      "uri": "https://dev.azure.com/nkdagility/vsts-processtemplate-task/_wiki/wikis/vsts-processtemplate-task"
     },
     "support": {
       "uri": "https://github.com/nkdAgility/vsts-process-template-manager/issues"
@@ -115,13 +115,13 @@
     },
     {
       "id": "vstsProcess-endpoint",
-      "description": "Service Endpoint for XML Process Uploads",
+      "description": "Azure DevOps Service for Process Tools",
       "type": "ms.vss-endpoint.service-endpoint-type",
-      "url": "https://myaccount.visualstudio.com",
+      "url": "https://dev.azure.com/myaccount",
       "targets": [ "ms.vss-endpoint.endpoint-types" ],
       "properties": {
         "name": "VstsXmlProcessEndpoint",
-        "displayName": "VSTS Organisation (was Account)",
+        "displayName": "Azure DevOps Service Organisation (was Account)",
         "authenticationSchemes": [
           {
             "type": "ms.vss-endpoint.endpoint-auth-scheme-token"

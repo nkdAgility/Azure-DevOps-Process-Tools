@@ -1,7 +1,7 @@
 {
   "id": "63823D31-810C-4957-9BC1-859757ACE94D",
   "name": "processtemplate",
-  "friendlyName": "VSTS XML Process Import",
+  "friendlyName": "Azure DevOps Services Process (XML)",
   "description": "Deploys an XML Process to VSTS",
   "helpMarkDown": "v1.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}#2 [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
   "category": "Deploy",
@@ -27,7 +27,7 @@
     {
       "name": "account",
       "type": "string",
-      "label": "VSTS Account URL",
+      "label": "Azure DevOps Service Organisation URL",
       "defaultValue": "",
       "required": true,
       "helpMarkDown": "The URL of the VSTS instance to deploy the Template too. e.g. https://myaccount.visualstudio.com"
