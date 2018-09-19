@@ -1,8 +1,8 @@
 {
   "id": "C6E8CD46-7141-41D1-B21E-9932E08FA67F",
   "name": "ineritedprocessmigration",
-  "friendlyName": "VSTS Inherited Process Migration",
-  "description": "Supports migration/import/export of inherited processes from VSTS Organisations",
+  "friendlyName": "Azure DevOps Services Process (Inherited)",
+  "description": "Supports migration/import/export of inherited processes from Azure DevOps Service Organisations",
   "helpMarkDown": "v1.#{GitVersion.Minor}#.#{GitVersion.Patch}#.#{GitVersion.COMMITSSINCEVERSIONSOURCE}# [More Information](https://github.com/nkdAgility/vsts-process-template-task#readme)",
   "category": "Deploy",
   "visibility": [
@@ -141,7 +141,7 @@
       "groupName": "options"
     }
   ],
-  "instanceNameFormat": "VSTS process $(command)",
+  "instanceNameFormat": "Azure DevOps Services Process $(command)",
   "execution": {
     "PowerShell3": {
       "target": "$(currentDirectory)\\processmigratestart.ps1",
