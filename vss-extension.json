@@ -32,31 +32,31 @@
   ],
   "links": {
     "home": {
-      "uri": "https://dev.azure.com/nkdagility/vsts-processtemplate-task/"
+      "uri": "https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/"
     },
     "getstarted": {
-      "uri": "https://dev.azure.com/nkdagility/vsts-processtemplate-task/_wiki/wikis/VSTS-Sync-Migrator-Docs?pagePath=%2Fgetting%20started"
+      "uri": "https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/_wiki/wikis/process-tools"
     },
     "learn": {
-      "uri": "https://dev.azure.com/nkdagility/vsts-processtemplate-task/_wiki/wikis/vsts-processtemplate-task"
+      "uri": "https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/_wiki/wikis/process-tools"
     },
     "support": {
-      "uri": "https://github.com/nkdAgility/vsts-process-template-manager/issues"
+      "uri": "https://github.com/nkdAgility/Azure-DevOps-Process-Tools/issues"
     },
     "repository": {
-      "uri": "https://github.com/nkdAgility/vsts-process-template-manager"
+      "uri": "https://github.com/nkdAgility/Azure-DevOps-Process-Tools"
     },
     "issues": {
-      "uri": "https://github.com/nkdAgility/vsts-process-template-manager/issues"
+      "uri": "https://github.com/nkdAgility/Azure-DevOps-Process-Tools/issues"
     }
   },
   "CustomerQnASupport": {
     "enableqna": "true",
-    "url": "https://github.com/nkdAgility/vsts-process-template-manager/issues"
+    "url": "https://github.com/nkdAgility/Azure-DevOps-Process-Tools/issues"
   },
   "repository": {
     "type": "git",
-    "uri": "https://github.com/nkdAgility/vsts-process-template-manager.git"
+    "uri": "https://github.com/nkdAgility/Azure-DevOps-Process-Tools.git"
   },
   "icons": {
     "default": "images/extension-icon.png"

@@ -10,11 +10,11 @@ These build tasks allow you to manage both the XML and Inherited processes in Az
 ## What can you do with this tool?
 
 - **Azure DevOps Services Process (XML)** Task - Upload XML Based Process from an export
-- **Azure DevOps Services Process (Inherited)** Task - Migrate Inherited Process(s) between Organisations (uses [https://github.com/Microsoft/process-migrator](https://github.com/Microsoft/process-migrator))
+- **Azure DevOps Services Process (Inherited)** Task - Migrate Inherited Process(s) between Organisations (wrapper for [https://github.com/Microsoft/process-migrator](https://github.com/Microsoft/process-migrator))
 
 ![Screenshot of Process Uploader](/images/screenshot-01.png)
 
-Full documentation is available on [https://dev.azure.com/nkdagility/vsts-processtemplate-task/](https://dev.azure.com/nkdagility/vsts-processtemplate-task/)
+Full documentation is available on [https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/](https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/)
 
 ## Getting the Tools
 

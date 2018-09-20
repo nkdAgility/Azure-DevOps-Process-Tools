@@ -14,7 +14,7 @@ These build tasks allow you to manage both the XML and Inherited processes in Az
 
 ![Screenshot of Process Uploader](/images/screenshot-01.png)
 
-Full documentation is available on [https://dev.azure.com/nkdagility/vsts-processtemplate-task/](https://dev.azure.com/nkdagility/vsts-processtemplate-task/)
+Full documentation is available on [https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/](https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/)
 
 ## Getting the Tools
 
