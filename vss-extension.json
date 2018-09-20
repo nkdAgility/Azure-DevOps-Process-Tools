@@ -127,7 +127,7 @@
             "type": "ms.vss-endpoint.endpoint-auth-scheme-token"
           }
         ],
-        "helpMarkDown": "<a href=\"http://vsts-process-template-management.readthedocs.io\" target=\"_blank\"><b>Learn More</b></a>"
+        "helpMarkDown": "<a href=\"https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/_wiki/wikis/process-tools/\" target=\"_blank\"><b>Learn More</b></a>"
       }
     }
   ]
