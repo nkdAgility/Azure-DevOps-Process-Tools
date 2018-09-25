@@ -3,22 +3,21 @@
 # Command
 $command = Get-VstsInput -Name command -Require
 # sourceAccount
-$sourceAccountName = Get-VstsInput -Name sourceAccount -Require
-$sourceAccountEp = Get-VstsEndpoint -Name $sourceAccountName -Require
+$sourceAccountName = Get-VstsInput -Name sourceAccount
+$sourceAccountEp = Get-VstsEndpoint -Name $sourceAccountName
 $sourceAccountToken = [string]$sourceAccountEp.Auth.Parameters.ApiToken
 $sourceAccountUrl = [string]$sourceAccountEp.Url
 # sourceProcessName
 
-$sourceProcessName = Get-VstsInput -Name sourceProcessName -Require
+$sourceProcessName = Get-VstsInput -Name sourceProcessName
 # TargetAccount
-$targetAccountName = Get-VstsInput -Name targetAccount -Require
-$targetAccountEp = Get-VstsEndpoint -Name $targetAccountName -Require
+$targetAccountName = Get-VstsInput -Name targetAccount
+$targetAccountEp = Get-VstsEndpoint -Name $targetAccountName
 $targetAccountToken = [string]$targetAccountEp.Auth.Parameters.ApiToken
 $targetAccountUrl = [string]$targetAccountEp.Url
 # targetProcessName
-$targetProcessName = Get-VstsInput -Name targetProcessName -Require
+$targetProcessName = Get-VstsInput -Name targetProcessName
 # processFilename
-$processFilename = Get-VstsInput -Name processFilename -Require
 # logLevel
 $logLevel = Get-VstsInput -Name logLevel -Require
 # logFilename
@@ -65,7 +64,7 @@ if (!(Test-Path $configFile))
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name overwritePicklist -Value [bool]$overwritePicklist
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnRuleImportFailure -Value [bool]$continueOnRuleImportFailure
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnFieldDefaultValueFailure -Value [bool]$continueOnFieldDefaultValueFailure
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty] -Name skipImportFormContributions -Value [bool]$skipImportFormContributions
+    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name skipImportFormContributions -Value [bool]$skipImportFormContributions
 
     Add-Member -InputObject $configObject -MemberType NoteProperty -Name options -Value $configOptionsObject
 
