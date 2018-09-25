@@ -88,15 +88,15 @@
       "name": "logLevel",
       "type": "pickList",
       "label": "Log Level",
-      "defaultValue": "Verbose",
+      "defaultValue": "verbose",
       "helpMarkDown": "Optional, log level for console. Possibe values are 'Verbose'/'Information'/'Warning'/'Error'.",
       "required": "false",
       "groupName": "options",
       "options": {
-        "Verbose": "Verbose",
-        "Information": "Information",
-        "Warning": "Warning",
-        "Error": "Error"
+        "verbose": "verbose",
+        "information": "information",
+        "warning": "warning",
+        "error": "error"
       }
     },
     {
