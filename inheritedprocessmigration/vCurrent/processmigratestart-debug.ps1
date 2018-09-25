@@ -42,12 +42,12 @@ $erroractionpreference='stop'
 # Command
 $env:INPUT_command = $TestData.command
 # Source Account
-$env:INPUT_sourceAccount = 'EP1'
-$env:ENDPOINT_URL_EP1 = $TestData.sourceAccountUrl
-$env:ENDPOINT_AUTH_EP1 = "{ `"Parameters`": { `"ApiToken`": `"$($TestData.sourceAccountToken)`"}, `"Scheme`": `"Token`" }"
-$env:ENDPOINT_DATA_EP1 = '{ "Key1": "Value1", "Key2": "Value2" }'
+#$env:INPUT_sourceAccount = 'EP1'
+#$env:ENDPOINT_URL_EP1 = $TestData.sourceAccountUrl
+#$env:ENDPOINT_AUTH_EP1 = "{ `"Parameters`": { `"ApiToken`": `"$($TestData.sourceAccountToken)`"}, `"Scheme`": `"Token`" }"
+#$env:ENDPOINT_DATA_EP1 = '{ "Key1": "Value1", "Key2": "Value2" }'
 # sourceProcessName
-$env:INPUT_sourceProcessName = $TestData.sourceProcessName
+#$env:INPUT_sourceProcessName = $TestData.sourceProcessName
 # Target Account
 $env:INPUT_targetAccount = 'EP2'
 $env:ENDPOINT_URL_EP2 = $TestData.targetAccountUrl
