@@ -1,5 +1,5 @@
 ﻿#Save-Module -Name VstsTaskSdk -Path ..\processtemplatetask\processtemplatetaskv2\ps_modules\
-#Set-Location C:\Users\MartinHinshelwoodnkd\source\repos\vsts-processtemplate-task\inheritedprocessmigration\vCurrent
+#Set-Location C:\Users\MartinHinshelwoodnkd\source\repos\Azure-DevOps-Process-Tools\inheritedprocessmigration\vCurrent
 Import-Module .\\ps_modules\VstsTaskSdk\VstsTaskSdk.psd1
 #Import-Module -Name VstsTaskSdk
 #### Usefull bits ##############
