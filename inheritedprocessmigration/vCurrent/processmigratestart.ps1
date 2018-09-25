@@ -3,19 +3,26 @@ $ErrorActionPreference = "Stop"
 
 # Command
 $command = Get-VstsInput -Name command -Require
-# sourceAccount
-$sourceAccountName = Get-VstsInput -Name sourceAccount
-$sourceAccountEp = Get-VstsEndpoint -Name $sourceAccountName
-$sourceAccountToken = [string]$sourceAccountEp.Auth.Parameters.ApiToken
-$sourceAccountUrl = [string]$sourceAccountEp.Url
+
+# sourceAccount 
+$sourceAccountName = Get-VstsInput -Name sourceAccount 
+if ($sourceAccountName -ne $null)
+{
+	$sourceAccountEp = Get-VstsEndpoint -Name $sourceAccountName
+	$sourceAccountToken = [string]$sourceAccountEp.Auth.Parameters.ApiToken
+	$sourceAccountUrl = [string]$sourceAccountEp.Url
+}
 # sourceProcessName
 
 $sourceProcessName = Get-VstsInput -Name sourceProcessName
 # TargetAccount
 $targetAccountName = Get-VstsInput -Name targetAccount
-$targetAccountEp = Get-VstsEndpoint -Name $targetAccountName
-$targetAccountToken = [string]$targetAccountEp.Auth.Parameters.ApiToken
-$targetAccountUrl = [string]$targetAccountEp.Url
+if ($targetAccountName -ne $null)
+{
+	$targetAccountEp = Get-VstsEndpoint -Name $targetAccountName
+	$targetAccountToken = [string]$targetAccountEp.Auth.Parameters.ApiToken
+	$targetAccountUrl = [string]$targetAccountEp.Url
+}
 # targetProcessName
 $targetProcessName = Get-VstsInput -Name targetProcessName
 # processFilename
@@ -25,13 +32,13 @@ $logLevel = Get-VstsInput -Name logLevel -Require
 # logFilename
 $logFilename = Get-VstsInput -Name logFilename -Require
 # overwritePicklist
-$overwritePicklist = Get-VstsInput -Name overwritePicklist -Require
+$overwritePicklist = Get-VstsInput -Name overwritePicklist -Require -AsBool
 # continueOnRuleImportFailure
-$continueOnRuleImportFailure = Get-VstsInput -Name continueOnRuleImportFailure -Require
+$continueOnRuleImportFailure = Get-VstsInput -Name continueOnRuleImportFailure -Require -AsBool
 # continueOnFieldDefaultValueFailure
-$continueOnFieldDefaultValueFailure = Get-VstsInput -Name continueOnFieldDefaultValueFailure -Require
+$continueOnFieldDefaultValueFailure = Get-VstsInput -Name continueOnFieldDefaultValueFailure -Require -AsBool
 # skipImportFormContributions
-$skipImportFormContributions = Get-VstsInput -Name skipImportFormContributions -Require
+$skipImportFormContributions = Get-VstsInput -Name skipImportFormContributions -Require -AsBool
 
 get-childitem -path env:INPUT_*
 get-childitem -path env:ENDPOINT_*
@@ -87,5 +94,8 @@ npm install process-migrator -g
 Write-VstsTaskVerbose $command
 
 process-migrator --mode=$command --config=$configFile
+
+Write-VstsTaskVerbose "Removing $configFile file to remove PAT tokens from file system." 
+Remove-Item $configFile
 
 
