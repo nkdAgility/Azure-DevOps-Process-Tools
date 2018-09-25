@@ -6,7 +6,7 @@ $command = Get-VstsInput -Name command -Require
 
 # sourceAccount 
 $sourceAccountName = Get-VstsInput -Name sourceAccount 
-if ($sourceAccountName -ne $null)
+if ($sourceAccountName -ne $null -or $sourceAccountName -ne "")
 {
 	$sourceAccountEp = Get-VstsEndpoint -Name $sourceAccountName
 	$sourceAccountToken = [string]$sourceAccountEp.Auth.Parameters.ApiToken
@@ -17,7 +17,7 @@ if ($sourceAccountName -ne $null)
 $sourceProcessName = Get-VstsInput -Name sourceProcessName
 # TargetAccount
 $targetAccountName = Get-VstsInput -Name targetAccount
-if ($targetAccountName -ne $null)
+if ($targetAccountName -ne $null -or $targetAccountName -ne "")
 {
 	$targetAccountEp = Get-VstsEndpoint -Name $targetAccountName
 	$targetAccountToken = [string]$targetAccountEp.Auth.Parameters.ApiToken
