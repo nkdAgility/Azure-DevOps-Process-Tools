@@ -1,4 +1,5 @@
 
+$ErrorActionPreference = "Stop"
 
 # Command
 $command = Get-VstsInput -Name command -Require
@@ -18,6 +19,7 @@ $targetAccountUrl = [string]$targetAccountEp.Url
 # targetProcessName
 $targetProcessName = Get-VstsInput -Name targetProcessName
 # processFilename
+$processFilename = Get-VstsInput -Name processFilename
 # logLevel
 $logLevel = Get-VstsInput -Name logLevel -Require
 # logFilename
