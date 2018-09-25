@@ -70,10 +70,22 @@ if (!(Test-Path $configFile))
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name processFilename -Value $processFilename
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name logLevel -Value $logLevel
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name logFilename -Value $logFilename
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name overwritePicklist -Value [bool]$overwritePicklist
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnRuleImportFailure -Value [bool]$continueOnRuleImportFailure
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnFieldDefaultValueFailure -Value [bool]$continueOnFieldDefaultValueFailure
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name skipImportFormContributions -Value [bool]$skipImportFormContributions
+	if ($overwritePicklist)
+	{
+		Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name overwritePicklist -Value $overwritePicklist
+	}
+	if ($continueOnRuleImportFailure)
+	{
+		Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnRuleImportFailure -Value $continueOnRuleImportFailure
+	}
+    if ($continueOnFieldDefaultValueFailure)
+	{
+		Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnFieldDefaultValueFailure -Value $continueOnFieldDefaultValueFailure
+	}
+    if ($skipImportFormContributions)
+	{
+		Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name skipImportFormContributions -Value $skipImportFormContributions
+	}
 
     Add-Member -InputObject $configObject -MemberType NoteProperty -Name options -Value $configOptionsObject
 
