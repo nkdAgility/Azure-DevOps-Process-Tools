@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "processtemplate",
-  "name": "Azure DevOps Process Tools",
+  "name": "Process Tools for Azure DevOps ",
   "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}##{GitVersion.COMMITSSINCEVERSIONSOURCE}#",
   "public": false,
   "publisher": "nkdAgility",
