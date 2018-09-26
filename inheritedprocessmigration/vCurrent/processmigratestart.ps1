@@ -1,6 +1,4 @@
 
-$ErrorActionPreference = "Stop"
-
 # Command
 $command = Get-VstsInput -Name command -Require
 
@@ -70,10 +68,22 @@ if (!(Test-Path $configFile))
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name processFilename -Value $processFilename
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name logLevel -Value $logLevel
     Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name logFilename -Value $logFilename
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name overwritePicklist -Value [bool]$overwritePicklist
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnRuleImportFailure -Value [bool]$continueOnRuleImportFailure
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnFieldDefaultValueFailure -Value [bool]$continueOnFieldDefaultValueFailure
-    Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name skipImportFormContributions -Value [bool]$skipImportFormContributions
+	if ($overwritePicklist)
+	{
+		Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name overwritePicklist -Value $overwritePicklist
+	}
+	if ($continueOnRuleImportFailure)
+	{
+		Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnRuleImportFailure -Value $continueOnRuleImportFailure
+	}
+    if ($continueOnFieldDefaultValueFailure)
+	{
+		Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name continueOnFieldDefaultValueFailure -Value $continueOnFieldDefaultValueFailure
+	}
+    if ($skipImportFormContributions)
+	{
+		Add-Member -InputObject $configOptionsObject -MemberType NoteProperty -Name skipImportFormContributions -Value $skipImportFormContributions
+	}
 
     Add-Member -InputObject $configObject -MemberType NoteProperty -Name options -Value $configOptionsObject
 
@@ -89,11 +99,30 @@ $ConfigData
 
 ###########################################################
 
+Write-VstsTaskVerbose "============NPM-INSTALL============"
+
+$ErrorActionPreference = "SilentlyContinue"
+
 npm install process-migrator -g
 
-Write-VstsTaskVerbose $command
+$ErrorActionPreference = "Stop"
 
-process-migrator --mode=$command --config=$configFile
+Write-VstsTaskVerbose "============PROCESS-MIGRATOR============"
+
+Write-VstsTaskVerbose $command 
+
+$output = process-migrator --mode=$command --config=$configFile 
+
+$output
+
+if ($LASTEXITCODE -ne 0)
+{
+    $err = $output.Where{$PSItem -match 'ERROR'}
+    Write-VstsTaskError "Process-Migrator FAILED: $err" -ErrCode $LASTEXITCODE
+}
+
+
+Write-VstsTaskVerbose "============CLEANUP============"
 
 Write-VstsTaskVerbose "Removing $configFile file to remove PAT tokens from file system." 
 Remove-Item $configFile
