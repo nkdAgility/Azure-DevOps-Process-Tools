@@ -1,6 +1,4 @@
 
-$ErrorActionPreference = "Stop"
-
 # Command
 $command = Get-VstsInput -Name command -Require
 
@@ -101,11 +99,30 @@ $ConfigData
 
 ###########################################################
 
+Write-VstsTaskVerbose "============NPM-INSTALL============"
+
+$ErrorActionPreference = "SilentlyContinue"
+
 npm install process-migrator -g
 
-Write-VstsTaskVerbose $command
+$ErrorActionPreference = "Stop"
 
-process-migrator --mode=$command --config=$configFile
+Write-VstsTaskVerbose "============PROCESS-MIGRATOR============"
+
+Write-VstsTaskVerbose $command 
+
+$output = process-migrator --mode=$command --config=$configFile 
+
+$output
+
+if ($LASTEXITCODE -ne 0)
+{
+    $err = $output.Where{$PSItem -match 'ERROR'}
+    Write-VstsTaskError "Process-Migrator FAILED: $err" -ErrCode $LASTEXITCODE
+}
+
+
+Write-VstsTaskVerbose "============CLEANUP============"
 
 Write-VstsTaskVerbose "Removing $configFile file to remove PAT tokens from file system." 
 Remove-Item $configFile
