@@ -2,12 +2,11 @@
   "manifestVersion": 1,
   "id": "processtemplate",
   "name": "Process Tools for Azure DevOps ",
-  "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}##{GitVersion.COMMITSSINCEVERSIONSOURCE}#",
+  "version": "#{GitVersion.Major}#.#{GitVersion.Minor}#.#{GitVersion.Patch}#",
   "public": false,
   "publisher": "nkdAgility",
   "galleryFlags": [
-    "Public",
-    "Free"
+    "Public"
   ],
   "targets": [
     {
@@ -15,12 +14,13 @@
     },
     {
       "id": "Microsoft.TeamFoundation.Server",
-      "version": "[15.0,)"
+      "version": "[15.0,)" 
     }
   ],
   "description": "Incudes tasks to help you manage your Processes (was Process Templates) in Azure DevOps Services. Supports both XML Process and the new Inherited Process.",
   "categories": [
-    "Build and release"
+    "Azure Pipelines",
+    "Azure Boards"
   ],
   "tags": [
     "release",

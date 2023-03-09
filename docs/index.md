@@ -14,7 +14,7 @@ These build tasks allow you to manage both the XML and Inherited processes in Az
 
 ![Screenshot of Process Uploader](./../images/screenshot-01.png)
 
-Full documentation is available on [https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/](https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/)
+Full documentation is available on [https://nkdagility.github.io/Azure-DevOps-Process-Tools/](https://nkdagility.github.io/Azure-DevOps-Process-Tools/)
 
 ## Getting the Tools
 
