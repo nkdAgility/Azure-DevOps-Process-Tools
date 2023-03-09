@@ -1,4 +1,6 @@
-# Azure DevOps Process Tools [![Visual Studio Marketplace](https://vsmarketplacebadge.apphb.com/version-short/nkdagility.processtemplate.svg)](https://marketplace.visualstudio.com/items?itemName=nkdagility.processtemplate)
+# Azure DevOps Process Tools
+
+(https://marketplace.visualstudio.com/items?itemName=nkdagility.processtemplate)
 
 This task automates the Process of managing your Process changes from source control to Azure DevOps so that you can keep all your projects in sync. 
 
