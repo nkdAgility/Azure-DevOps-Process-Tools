@@ -39,10 +39,10 @@
       "uri": "https://github.com/nkdAgility/Azure-DevOps-Process-Tools"
     },
     "getstarted": {
-      "uri": "https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/_wiki/wikis/process-tools"
+      "uri": "https://nkdagility.github.io/Azure-DevOps-Process-Tools/"
     },
     "learn": {
-      "uri": "https://dev.azure.com/nkdagility/Azure-DevOps-Process-Tools/_wiki/wikis/process-tools"
+      "uri": "https://nkdagility.github.io/Azure-DevOps-Process-Tools/"
     },
     "support": {
       "uri": "https://github.com/nkdAgility/Azure-DevOps-Process-Tools/issues"
@@ -58,6 +58,18 @@
     "enableqna": "true",
     "url": "https://github.com/nkdAgility/Azure-DevOps-Process-Tools/issues"
   },
+  "badges": [
+    {
+      "href": "https://dev.azure.com/nkdagility/AzureDevOps-Tools/_build/latest?definitionId=110",
+      "uri": "https://dev.azure.com/nkdagility/AzureDevOps-Tools/_apis/build/status/VariableTools-CI",
+      "description": "Azure Pipline CI for this project"
+    },
+    {
+      "href": "https://dev.azure.com/nkdagility/AzureDevOps-Tools/_release?_a=releases&view=mine&definitionId=7",
+      "uri": "https://vsrm.dev.azure.com/nkdagility/_apis/public/Release/badge/1b52ce63-eccc-41c8-88f9-ae6ebeefdc63/7/21",
+      "description": "Azure Pipeline CD for the project"
+    }
+  ],
   "repository": {
     "type": "git",
     "uri": "https://github.com/nkdAgility/Azure-DevOps-Process-Tools.git"
